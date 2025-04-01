@@ -1,0 +1,15 @@
+.sidebar-button {
+    -fx-background-color: #34495E;
+    -fx-text-fill: #ECF0F1;
+    -fx-font-size: 16px;
+    -fx-pref-width: 210px;
+    -fx-pref-height: 50px;
+    -fx-background-radius: 10px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 15 0 15;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #1ABC9C; /* Teal on hover */
+    -fx-cursor: hand;
+}

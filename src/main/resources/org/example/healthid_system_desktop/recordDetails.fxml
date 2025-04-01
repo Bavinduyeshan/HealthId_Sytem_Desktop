@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.MedicalRecordDetailsController">
+   <left>
+      <VBox fx:id="menuBar" prefHeight="700.0" prefWidth="190.0" style="-fx-background-color: #2C3E50; -fx-background-radius: 15px;" visible="true" spacing="15" alignment="CENTER">
+         <children>
+            <Label fx:id="usernameLabel" text="Welcome, User!" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <javafx.geometry.Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="editButton" onAction="#toggleEdit" onMouseEntered="#handleEditHover" onMouseExited="#handleEditHoverExit" style="-fx-background-color: #455A64; -fx-text-fill: #FFFFFF; -fx-font-size: 14; -fx-background-radius: 8; -fx-padding: 10;" prefHeight="51.0" prefWidth="147.0" text="Edit" />
+            <Button fx:id="saveButton" onAction="#saveChanges" onMouseEntered="#handleSaveHover" onMouseExited="#handleSaveHoverExit" visible="false" style="-fx-background-color: #455A64; -fx-text-fill: #FFFFFF; -fx-font-size: 14; -fx-background-radius: 8; -fx-padding: 10;" prefHeight="51.0" prefWidth="147.0" text="Save" />
+            <Button fx:id="deleteButton" onAction="#deleteRecord" onMouseEntered="#handleDeleteHover" onMouseExited="#handleDeleteHoverExit" style="-fx-background-color: #455A64; -fx-text-fill: #FFFFFF; -fx-font-size: 14; -fx-background-radius: 8; -fx-padding: 10;" prefHeight="51.0" prefWidth="147.0" text="Delete" />
+            <Button fx:id="fancyButton" onAction="#closeWindow" onMouseEntered="#handelHover" onMouseExited="#handleHoverExit" style="-fx-background-color: #455A64; -fx-text-fill: #FFFFFF; -fx-font-size: 14; -fx-background-radius: 8; -fx-padding: 10;" prefHeight="51.0" prefWidth="147.0" text="Close" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox spacing="20" style="-fx-padding: 20;">
+         <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2196F3; -fx-padding: 20; -fx-background-radius: 8;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Medical Records" />
+         </HBox>
+         <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #333;" text="Record Details" />
+            <GridPane hgap="20" vgap="15">
+               <columnConstraints>
+                  <ColumnConstraints prefWidth="120" />
+                  <ColumnConstraints prefWidth="300" />
+               </columnConstraints>
+               <children>
+                  <Label style="-fx-text-fill: #666;" text="Patient ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                  <Label fx:id="patientIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  <Label style="-fx-text-fill: #666;" text="Disease:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                  <Label fx:id="diseaseLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label style="-fx-text-fill: #666;" text="Doctor ID:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  <Label fx:id="doctorIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label style="-fx-text-fill: #666;" text="Diagnostic Data:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                  <TextArea fx:id="diagnosticDataTextArea" editable="false" prefHeight="80" wrapText="true" style="-fx-background-radius: 4;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label style="-fx-text-fill: #666;" text="Treatments:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                  <TextArea fx:id="treatmentsTextArea" editable="false" prefHeight="80" wrapText="true" style="-fx-background-radius: 4;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label style="-fx-text-fill: #666;" text="Created At:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                  <Label fx:id="createdAtLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               </children>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+            </GridPane>
+         </VBox>
+      </VBox>
+   </center>
+</BorderPane>

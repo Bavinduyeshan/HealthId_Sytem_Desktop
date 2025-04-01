@@ -1,0 +1,15 @@
+/* Default Button Style */
+.login-button {
+    -fx-background-color: #0277BD;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 20;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+/* Hover Effect */
+.login-button:hover {
+    -fx-background-color: #2688d4;
+}
+

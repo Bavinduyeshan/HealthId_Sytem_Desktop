@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.healthid_system_desktop.controller.MedicalRecordDetailsController">
+    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+        <Label text="Medical Record Details" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        <GridPane hgap="10" vgap="10">
+            <Label text="Patient ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label fx:id="patientIdLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Disease:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <Label fx:id="diseaseLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Doctor ID:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <Label fx:id="doctorIdLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Diagnostic Data:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextArea fx:id="diagnosticDataTextArea" editable="false" wrapText="true" prefHeight="80" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Treatments:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextArea fx:id="treatmentsTextArea" editable="false" wrapText="true" prefHeight="80" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <Label text="Created At:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <Label fx:id="createdAtLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        </GridPane>
+
+        <Button text="Close" onAction="#closeWindow"/>
+    </VBox>
+</AnchorPane>

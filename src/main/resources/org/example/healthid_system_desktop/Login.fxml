@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="541.0" prefWidth="816.0" style="-fx-background-color: #eff7ff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.UserController">
+
+   <VBox alignment="TOP_CENTER" layoutX="443.0" layoutY="76.0" prefHeight="420.0" prefWidth="331.0" spacing="20" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px;">
+      <children>
+         <Text style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-fill: #333;" text="Sign In" />
+         <Text style="-fx-font-size: 14px; -fx-fill: #666;" text="Welcome back! Please enter your details" />
+      
+         <TextField fx:id="txtusername" prefWidth="280.0" promptText="Enter your Username" style="-fx-background-radius: 10px; -fx-padding: 12px; -fx-border-color: #172854;" />
+
+         <HBox spacing="15">
+            <PasswordField fx:id="txtpassword" prefHeight="37.0" prefWidth="261.0" promptText="Password" style="-fx-background-radius: 8px; -fx-padding: 12px; -fx-border-color: #ccc;" />
+            <ImageView fx:id="eyeIcon" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/eye_icon.png" />
+               </image>
+            </ImageView>
+         </HBox>
+
+         <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="294.0" spacing="70">
+            <CheckBox prefHeight="26.0" prefWidth="33.0" text="Remember for 30 Days" />
+            <Text style="-fx-fill: #388af5; -fx-underline: true; -fx-cursor: hand;" text="Forgot password" />
+         </HBox>
+
+         <Button onAction="#handleLogin" fx:id="btnSignIn" prefWidth="280.0" style="-fx-background-color: #388af5; -fx-text-fill: white;                                           -fx-background-radius: 8px; -fx-font-size: 16px; -fx-padding: 12px;" text="Sign In" />
+      </children>
+   </VBox>
+   <Pane layoutX="6.0" layoutY="12.0" prefHeight="522.0" prefWidth="392.0" style="-fx-background-color: #388af5; -fx-background-radius: 15px;">
+      <children>
+         <ImageView fitHeight="326.0" fitWidth="331.0" layoutX="37.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/login2.jpg" />
+            </image>
+         </ImageView>
+      </children>
+   </Pane>
+
+</AnchorPane>

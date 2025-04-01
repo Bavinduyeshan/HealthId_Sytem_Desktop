@@ -1,0 +1,52 @@
+/* Main Styles */
+.root {
+    -fx-font-family: 'Segoe UI';
+}
+
+/* Navigation Buttons */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-padding: 15 20;
+    -fx-background-radius: 10;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-cursor: hand;
+}
+
+.nav-button:armed {
+    -fx-background-color: rgba(255,255,255,0.2);
+}
+
+/* Stats Cards */
+.stats-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
+    -fx-min-width: 280;
+}
+
+.stats-title {
+    -fx-text-fill: #666;
+    -fx-font-size: 14;
+}
+
+.stats-value {
+    -fx-text-fill: #2f3e79;
+    -fx-font-size: 32;
+    -fx-font-weight: bold;
+}
+
+/* Activity Card */
+.activity-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
+    -fx-min-width: 900;
+}
