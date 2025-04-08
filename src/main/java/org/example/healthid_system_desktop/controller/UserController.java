@@ -139,6 +139,7 @@
 
 package org.example.healthid_system_desktop.controller;
 
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -167,6 +168,13 @@ public class UserController {
     @FXML private CheckBox chkRemember;          // "Remember Me" checkbox (not implemented)
     @FXML private ImageView eyeIcon;             // Icon to toggle password visibility
     @FXML private Text txtForgotPassword;        // "Forgot Password" text link
+
+
+    private Stage stage;
+    private HostServices hostServices;
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
+    }
 
     // Instance of LoginService for authentication and API calls
     private final LoginService loginService = new LoginService();
@@ -227,6 +235,8 @@ public class UserController {
             Dashboard controller = loader.getController();
             controller.setAuthToken(token);         // Added method
             controller.setUserDetails(userDetails); // Added method
+            // Pass HostServices and other data to DashboardController
+            controller.setHostServices(hostServices);
 
             Stage stage = (Stage) btnSignIn.getScene().getWindow();
             stage.setScene(new Scene(root));

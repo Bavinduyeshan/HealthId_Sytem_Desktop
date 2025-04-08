@@ -11,131 +11,167 @@
 
 <VBox prefHeight="400.0" prefWidth="600.0"
       spacing="20"
-      style="-fx-background-color: #F5F7FA;
-             -fx-padding: 25;
-             -fx-background-radius: 12;
-             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 4);
-             -fx-border-color: #E0E4E8;
-             -fx-border-radius: 12;
-             -fx-border-width: 1;"
+      style="-fx-background-color: linear-gradient(to bottom, #FFFFFF, #F8FAFC);
+             -fx-padding: 30;
+             -fx-background-radius: 16;
+             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 6);
+             -fx-border-color: #E2E8F0;
+             -fx-border-radius: 16;
+             -fx-border-width: 1.5;"
       xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.healthid_system_desktop.controller.AddRecordPopupController">
     <children>
         <Label text="Add New Medical Record"
-               style="-fx-font-size: 20px;
+               style="-fx-font-size: 24px;
                       -fx-font-weight: bold;
-                      -fx-text-fill: #2C3E50;
-                      -fx-padding: 0 0 10 0;" />
+                      -fx-text-fill: #1E3A8A;
+                      -fx-padding: 0 0 15 0;
+                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);" />
 
-        <GridPane hgap="15" vgap="15">
+        <GridPane hgap="20" vgap="20">
             <columnConstraints>
-                <ColumnConstraints prefWidth="150" />
-                <ColumnConstraints prefWidth="400" />
+                <ColumnConstraints prefWidth="160" />
+                <ColumnConstraints prefWidth="420" />
             </columnConstraints>
 
             <Label text="Patient ID:"
                    GridPane.columnIndex="0"
                    GridPane.rowIndex="0"
-                   style="-fx-text-fill: #34495E;
+                   style="-fx-text-fill: #1F2937;
+                          -fx-font-size: 14px;
                           -fx-font-weight: bold;" />
             <TextField fx:id="patientIdField"
                        editable="false"
                        GridPane.columnIndex="1"
                        GridPane.rowIndex="0"
-                       style="-fx-background-color: #FFFFFF;
-                             -fx-border-color: #DDE4ED;
-                             -fx-border-radius: 6;
-                             -fx-background-radius: 6;" />
+                       style="-fx-background-color: #F9FAFB;
+                              -fx-border-color: #CBD5E1;
+                              -fx-border-radius: 8;
+                              -fx-background-radius: 8;
+                              -fx-text-fill: #4B5563;
+                              -fx-font-size: 14px;
+                              -fx-padding: 8;" />
 
             <Label text="Doctor ID:"
                    GridPane.columnIndex="0"
                    GridPane.rowIndex="1"
-                   style="-fx-text-fill: #34495E;
+                   style="-fx-text-fill: #1F2937;
+                          -fx-font-size: 14px;
                           -fx-font-weight: bold;" />
             <TextField fx:id="doctorIdField"
                        GridPane.columnIndex="1"
                        GridPane.rowIndex="1"
-                       style="-fx-background-color: #FFFFFF;
-                             -fx-border-color: #DDE4ED;
-                             -fx-border-radius: 6;
-                             -fx-background-radius: 6;" />
+                       style="-fx-background-color: #F9FAFB;
+                              -fx-border-color: #CBD5E1;
+                              -fx-border-radius: 8;
+                              -fx-background-radius: 8;
+                              -fx-text-fill: #4B5563;
+                              -fx-font-size: 14px;
+                              -fx-padding: 8;" />
 
             <Label text="Disease:"
                    GridPane.columnIndex="0"
                    GridPane.rowIndex="2"
-                   style="-fx-text-fill: #34495E;
+                   style="-fx-text-fill: #1F2937;
+                          -fx-font-size: 14px;
                           -fx-font-weight: bold;" />
             <ComboBox fx:id="diseaseComboBox"
                       GridPane.columnIndex="1"
                       GridPane.rowIndex="2"
                       promptText="Select a disease"
-                      style="-fx-background-color: #FFFFFF;
-                            -fx-border-color: #DDE4ED;
-                            -fx-border-radius: 6;
-                            -fx-background-radius: 6;" />
+                      style="-fx-background-color: #F9FAFB;
+                             -fx-border-color: #CBD5E1;
+                             -fx-border-radius: 8;
+                             -fx-background-radius: 8;
+                             -fx-font-size: 14px;
+                             -fx-padding: 8;" />
 
             <Label text="Diagnostic Data:"
                    GridPane.columnIndex="0"
                    GridPane.rowIndex="3"
-                   style="-fx-text-fill: #34495E;
+                   style="-fx-text-fill: #1F2937;
+                          -fx-font-size: 14px;
                           -fx-font-weight: bold;" />
             <TextArea fx:id="diagnosticDataArea"
                       prefRowCount="3"
                       GridPane.columnIndex="1"
                       GridPane.rowIndex="3"
-                      style="-fx-background-color: #FFFFFF;
-                            -fx-border-color: #DDE4ED;
-                            -fx-border-radius: 6;
-                            -fx-background-radius: 6;" />
+                      style="-fx-background-color: #F9FAFB;
+                             -fx-border-color: #CBD5E1;
+                             -fx-border-radius: 8;
+                             -fx-background-radius: 8;
+                             -fx-text-fill: #4B5563;
+                             -fx-font-size: 14px;
+                             -fx-padding: 8;" />
 
             <Label text="Treatments:"
                    GridPane.columnIndex="0"
                    GridPane.rowIndex="4"
-                   style="-fx-text-fill: #34495E;
+                   style="-fx-text-fill: #1F2937;
+                          -fx-font-size: 14px;
                           -fx-font-weight: bold;" />
             <TextArea fx:id="treatmentsArea"
                       prefRowCount="3"
                       GridPane.columnIndex="1"
                       GridPane.rowIndex="4"
-                      style="-fx-background-color: #FFFFFF;
-                            -fx-border-color: #DDE4ED;
-                            -fx-border-radius: 6;
-                            -fx-background-radius: 6;" />
+                      style="-fx-background-color: #F9FAFB;
+                             -fx-border-color: #CBD5E1;
+                             -fx-border-radius: 8;
+                             -fx-background-radius: 8;
+                             -fx-text-fill: #4B5563;
+                             -fx-font-size: 14px;
+                             -fx-padding: 8;" />
 
             <Label text="Report URL:"
                    GridPane.columnIndex="0"
                    GridPane.rowIndex="5"
-                   style="-fx-text-fill: #34495E;
+                   style="-fx-text-fill: #1F2937;
+                          -fx-font-size: 14px;
                           -fx-font-weight: bold;" />
-            <TextField fx:id="reportUrlField"
-                       GridPane.columnIndex="1"
-                       GridPane.rowIndex="5"
-                       style="-fx-background-color: #FFFFFF;
-                             -fx-border-color: #DDE4ED;
-                             -fx-border-radius: 6;
-                             -fx-background-radius: 6;" />
+            <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <Button fx:id="uploadReportButton"
+                        text="Upload Report"
+                        onAction="#uploadReport"
+                        style="-fx-background-color: #10B981;
+                               -fx-text-fill: white;
+                               -fx-font-size: 14px;
+                               -fx-font-weight: bold;
+                               -fx-padding: 8 16;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);"
+                        styleClass="upload-button" />
+                <Label fx:id="selectedFileLabel"
+                       text="No file selected"
+                       style="-fx-text-fill: #6B7280;
+                              -fx-font-size: 13px;" />
+            </HBox>
         </GridPane>
 
         <HBox alignment="CENTER_RIGHT" spacing="15">
             <Button onAction="#cancel"
                     text="Cancel"
-                    style="-fx-background-color: #E74C3C;
+                    style="-fx-background-color: #EF4444;
                            -fx-text-fill: white;
+                           -fx-font-size: 14px;
                            -fx-font-weight: bold;
-                           -fx-padding: 8 20;
-                           -fx-background-radius: 8;
+                           -fx-padding: 10 24;
+                           -fx-background-radius: 10;
                            -fx-cursor: hand;
-                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" />
+                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2);"
+                    styleClass="cancel-button" />
             <Button onAction="#save"
                     text="Save"
-                    style="-fx-background-color: #3498DB;
+                    style="-fx-background-color: #3B82F6;
                            -fx-text-fill: white;
+                           -fx-font-size: 14px;
                            -fx-font-weight: bold;
-                           -fx-padding: 8 20;
-                           -fx-background-radius: 8;
+                           -fx-padding: 10 24;
+                           -fx-background-radius: 10;
                            -fx-cursor: hand;
-                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" />
+                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2);"
+                    styleClass="save-button" />
         </HBox>
     </children>
 </VBox>

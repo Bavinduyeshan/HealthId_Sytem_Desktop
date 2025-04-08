@@ -398,6 +398,7 @@
 package org.example.healthid_system_desktop.controller;
 
 import javafx.animation.TranslateTransition;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -454,6 +455,7 @@ public class patientController {
     @FXML private TextArea treatmentArea;
     @FXML private TextArea notesArea;
 
+    private HostServices hostServices;
     private static final double MENU_WIDTH = 189.0;
     private static final double FULL_WIDTH = 1280.0;
     private static final double CENTER_WIDTH = FULL_WIDTH - MENU_WIDTH;
@@ -735,6 +737,20 @@ public class patientController {
 //    }
 private void openRecordDetails(MedicalRecord record) {
     try {
+        // Check if the reportUrl is a file path and open it with HostServices
+//        if (record.getReportUrl() != null && record.getReportUrl().startsWith("/uploads/")) {
+//            String fullUrl = "http://localhost:8081" + record.getReportUrl(); // Adjust base URL as needed
+//            System.out.println("Opening report URL: " + fullUrl);
+//            if (getHostServices() != null) {
+//                getHostServices().showDocument(fullUrl); // Open the PDF in the default browser
+//            } else {
+//                showError("HostServices is not available.");
+//            }
+//            return; // Exit after opening the file
+//        }
+
+
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/healthid_system_desktop/recordDetails.fxml"));
         Parent root = loader.load();
         MedicalRecordDetailsController controller = loader.getController();
@@ -744,6 +760,7 @@ private void openRecordDetails(MedicalRecord record) {
         System.out.println("Record Doctor ID: " + record.getDoctor_Id()); // Debug statement
         controller.setLoggedInDoctorId(doctorId);
         controller.setOnDeleteCallback(this::refreshMedicalRecords);
+        controller.setHostServices(getHostServices()); // Inject HostServices
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -756,6 +773,8 @@ private void openRecordDetails(MedicalRecord record) {
         showError("Error loading record details.");
     }
 }
+
+
 
     private void refreshMedicalRecords() {
         String patientId = patientIdField.getText();
@@ -788,7 +807,7 @@ private void openRecordDetails(MedicalRecord record) {
         String createdAt = record.getCreatedAt() != null ? record.getCreatedAt().format(formatter) : "N/A";
         String updatedAt = record.getUpdatedAt() != null ? record.getUpdatedAt().format(formatter) : "N/A";
         String patientId = record.getPatientID() != null ? record.getPatientID().toString() : "N/A";
-        String disease = record.getName() != null ? record.getName() : "N/A"; // Adjusted for String
+        String disease = record.getDisease().getName() != null ? record.getName() : "N/A"; // Adjusted for String
         String diagnosticData = record.getDiagnosticData() != null ? record.getDiagnosticData() : "N/A";
         String treatments = record.getTreatments() != null ? record.getTreatments() : "N/A";
         String reportUrl = record.getReportUrl() != null ? record.getReportUrl() : "N/A";
@@ -818,5 +837,13 @@ private void openRecordDetails(MedicalRecord record) {
 
     public void addMedicalRecordToList(MedicalRecord newRecord) {
         recordsListView.getItems().add(newRecord);
+    }
+
+    public HostServices getHostServices() {
+        return hostServices;
+    }
+
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
     }
 }

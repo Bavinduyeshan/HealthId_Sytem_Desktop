@@ -1,64 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1400.0" style="-fx-background-color: #F4F6F9;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.Dashboard">
+<AnchorPane prefHeight="900.0" prefWidth="1525.0" style="-fx-background-color: #F8FAFC;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.Dashboard">
    <children>
       <!-- Sidebar -->
-      <VBox layoutX="20.0" layoutY="20.0" prefHeight="860.0" prefWidth="250.0" style="-fx-background-color: #2C3E50; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);" spacing="15">
+      <VBox layoutX="14.0" layoutY="174.0" prefHeight="711.0" prefWidth="238.0" spacing="20" style="-fx-background-color: #2C3E50; -fx-background-radius: 20; -fx-padding: 25; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 12, 0, 0, 3);">
          <children>
-            <Button fx:id="patientScanButton" styleClass="sidebar-button" style="-fx-background-color: #34495E; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" text="Patient Scan" onAction="#openPatients" />
-            <Button styleClass="sidebar-button" style="-fx-background-color: #34495E; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" text="Doctor Data" />
-            <Button styleClass="sidebar-button" style="-fx-background-color: #34495E; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" text="Reports" />
-            <Button styleClass="sidebar-button" style="-fx-background-color: #34495E; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" text="Settings" />
+            <Button fx:id="patientScanButton" onAction="#openPatients" text="Patient Scan" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 190; -fx-pref-height: 50; -fx-background-radius: 12; -fx-alignment: CENTER_LEFT; -fx-padding: 0 20 0 20;" styleClass="sidebar-button" />
+            <Button fx:id="doctorDataButton" onAction="#openDoctorView" text="Doctor Data" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 190; -fx-pref-height: 50; -fx-background-radius: 12; -fx-alignment: CENTER_LEFT; -fx-padding: 0 20 0 20;" styleClass="sidebar-button" />
+            <Button text="Reports" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 190; -fx-pref-height: 50; -fx-background-radius: 12; -fx-alignment: CENTER_LEFT; -fx-padding: 0 20 0 20;" styleClass="sidebar-button" />
+            <Button text="Settings" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 190; -fx-pref-height: 50; -fx-background-radius: 12; -fx-alignment: CENTER_LEFT; -fx-padding: 0 20 0 20;" styleClass="sidebar-button" />
          </children>
       </VBox>
 
       <!-- Main Content Area -->
-      <VBox layoutX="290.0" layoutY="20.0" prefHeight="860.0" prefWidth="1090.0" spacing="20">
-         <!-- Header -->
-         <HBox prefHeight="80.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
-            <children>
-               <Label fx:id="dashboardLabel" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Welcome to Your Dashboard">
-                  <font>
-                     <Font size="24.0" />
-                  </font>
-               </Label>
-            </children>
-         </HBox>
-
-         <!-- Dashboard Cards -->
-         <HBox prefHeight="200.0" prefWidth="1090.0" spacing="20">
-            <HBox prefHeight="200.0" prefWidth="520.0" style="-fx-background-color: #3498DB; -fx-background-radius: 15; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+      <VBox layoutX="292.0" layoutY="22.0" prefHeight="823.0" prefWidth="1224.0" spacing="30">
+         <children>
+            <!-- Header -->
+            <HBox prefHeight="80.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
                <children>
-                  <VBox spacing="10">
-                     <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #ECF0F1;" text="Total Patients" />
-                     <Label style="-fx-font-size: 36; -fx-text-fill: #ECF0F1;" text="1,245" />
-                  </VBox>
+                  <Label fx:id="dashboardLabel" text="Welcome to Your Dashboard" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #1E3A8A;" />
                </children>
             </HBox>
-            <HBox prefHeight="200.0" prefWidth="520.0" style="-fx-background-color: #E74C3C; -fx-background-radius: 15; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
-               <children>
-                  <VBox spacing="10">
-                     <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #ECF0F1;" text="Active Doctors" />
-                     <Label style="-fx-font-size: 36; -fx-text-fill: #ECF0F1;" text="78" />
-                  </VBox>
-               </children>
-            </HBox>
-         </HBox>
 
-         <!-- Recent Activity -->
-         <VBox prefHeight="620.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" spacing="10">
-            <children>
-               <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Recent Activity" />
-               <Label style="-fx-font-size: 14; -fx-text-fill: #7F8C8D; -fx-padding: 10 0 0 0;" text="• Patient ID 1234 scanned at 10:30 AM" />
-               <Label style="-fx-font-size: 14; -fx-text-fill: #7F8C8D; -fx-padding: 5 0 0 0;" text="• Dr. Smith updated records at 9:15 AM" />
-            </children>
-         </VBox>
+            <!-- Cards -->
+            <HBox spacing="30" alignment="CENTER">
+               <!-- Patient Count Card -->
+               <VBox prefHeight="180.0" prefWidth="360.0" spacing="15" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 4);">
+                  <children>
+                     <Label text="Total Patients" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1F2937;" />
+                     <Label fx:id="patientCountLabel" text="0" style="-fx-font-size: 32; -fx-text-fill: #10B981;" />
+                     <Rectangle fx:id="patientProgress" height="10.0" width="10.0" fill="#10B981" arcHeight="10" arcWidth="10" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" />
+                  </children>
+               </VBox>
+
+               <!-- Doctor Count Card -->
+               <VBox prefHeight="180.0" prefWidth="360.0" spacing="15" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 4);">
+                  <children>
+                     <Label text="Total Doctors" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1F2937;" />
+                     <Label fx:id="doctorCountLabel" text="0" style="-fx-font-size: 32; -fx-text-fill: #3B82F6;" />
+                     <Rectangle fx:id="doctorProgress" height="10.0" width="0.0" fill="#3B82F6" arcHeight="10" arcWidth="10" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" />
+                  </children>
+               </VBox>
+
+               <!-- Medical Records Count Card -->
+               <VBox prefHeight="180.0" prefWidth="360.0" spacing="15" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 4);">
+                  <children>
+                     <Label text="Medical Records" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1F2937;" />
+                     <Label fx:id="recordsCountLabel" text="0" style="-fx-font-size: 32; -fx-text-fill: #8B5CF6;" />
+                     <Rectangle fx:id="recordsProgress" height="10.0" width="0.0" fill="#8B5CF6" arcHeight="10" arcWidth="10" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" />
+                  </children>
+               </VBox>
+            </HBox>
+         </children>
       </VBox>
+
+      <!-- Logo -->
+      <ImageView fitHeight="122.0" fitWidth="163.0" layoutX="70.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/lgo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

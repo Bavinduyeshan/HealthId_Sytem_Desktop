@@ -1,5 +1,6 @@
 package org.example.healthid_system_desktop.controller;
 
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -22,34 +23,40 @@ public class MedicalRecordDetailsController {
     @FXML private TextArea diagnosticDataTextArea;
     @FXML private TextArea treatmentsTextArea;
     @FXML private Label createdAtLabel;
-    @FXML private Button editButton;
-    @FXML private Button saveButton;
+    @FXML private Button updateButton;
     @FXML private Button deleteButton;
-    @FXML private Button fancyButton;
+    @FXML private Button closeButton;
     @FXML private Label usernameLabel;
+
+    private HostServices hostServices;
+
+    @FXML private Label reportUrlLabel; // Added to display report URL
+    @FXML private Button viewReportButton; // Added to view report
 
     private Stage stage;
     private MedicalRecord medicalRecord;
-    private Integer loggedInDoctorId; // To store the logged-in doctor's ID
-    private Runnable onDeleteCallback; // Callback to notify parent controller of deletion
+    private Integer loggedInDoctorId;
+    private Runnable onDeleteCallback;
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String UPDATE_MEDICAL_RECORD_URL = "http://localhost:8081/medical-records/update/";
     private static final String DELETE_MEDICAL_RECORD_URL = "http://localhost:8081/medical-records/delete/";
+
+
+    // Setter for HostServices (injected by parent controller)
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
+    }
 
     public void setMedicalRecord(MedicalRecord record) {
         this.medicalRecord = record;
         patientIdLabel.setText(String.valueOf(record.getPatientID()));
         doctorIdLabel.setText(String.valueOf(record.getDoctor_Id()));
-        diseaseLabel.setText(record.getName() != null ? record.getName() : "N/A"); // Adjusted for String (since you changed to name in previous steps)
+        diseaseLabel.setText(record.getDisease().getName() != null ? record.getDisease().getName() : "N/A");
         diagnosticDataTextArea.setText(record.getDiagnosticData());
         treatmentsTextArea.setText(record.getTreatments());
         createdAtLabel.setText(record.getCreatedAt() != null ? record.getCreatedAt().toString() : "N/A");
-
-        // Enable Edit/Delete buttons only if the logged-in doctor matches the record's doctor
-//        if (loggedInDoctorId == null || !loggedInDoctorId.equals(record.getDoctor_Id())) {
-//            editButton.setDisable(true);
-//            deleteButton.setDisable(true);
-//        }
+        reportUrlLabel.setText(record.getReportUrl() != null ? record.getReportUrl() : "No report available");
+        viewReportButton.setDisable(record.getReportUrl() == null); // Disable button if no report
     }
 
     public void setStage(Stage stage) {
@@ -69,46 +76,42 @@ public class MedicalRecordDetailsController {
     }
 
     @FXML
-    private void toggleEdit() {
-        boolean isEditable = !diagnosticDataTextArea.isEditable();
-        diagnosticDataTextArea.setEditable(isEditable);
-        treatmentsTextArea.setEditable(isEditable);
-        editButton.setVisible(!isEditable);
-        saveButton.setVisible(isEditable);
-    }
-
-    @FXML
-    private void saveChanges() {
+    private void updateRecord() {
         if (loggedInDoctorId == null || !loggedInDoctorId.equals(medicalRecord.getDoctor_Id())) {
             showAlert("Error", "You are not authorized to update this record.");
             return;
         }
 
-        // Update the record with new values
-        medicalRecord.setDiagnosticData(diagnosticDataTextArea.getText());
-        medicalRecord.setTreatments(treatmentsTextArea.getText());
-        medicalRecord.setUpdatedAt(LocalDateTime.now());
+        boolean isEditable = !diagnosticDataTextArea.isEditable();
+        diagnosticDataTextArea.setEditable(isEditable);
+        treatmentsTextArea.setEditable(isEditable);
 
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<MedicalRecord> request = new HttpEntity<>(medicalRecord, headers);
+        if (!isEditable) {
+            // Save changes when toggling back from edit mode
+            medicalRecord.setDiagnosticData(diagnosticDataTextArea.getText());
+            medicalRecord.setTreatments(treatmentsTextArea.getText());
+            medicalRecord.setUpdatedAt(LocalDateTime.now());
 
-            ResponseEntity<String> response = restTemplate.exchange(
-                    UPDATE_MEDICAL_RECORD_URL + medicalRecord.getId(), // Assuming MedicalRecord has an ID field
-                    HttpMethod.PUT,
-                    request,
-                    String.class
-            );
+            try {
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<MedicalRecord> request = new HttpEntity<>(medicalRecord, headers);
 
-            if (response.getStatusCode().is2xxSuccessful()) {
-                showAlert("Success", "Medical record updated successfully!");
-                toggleEdit(); // Switch back to view mode
-            } else {
-                showAlert("Error", "Failed to update medical record: HTTP " + response.getStatusCodeValue());
+                ResponseEntity<String> response = restTemplate.exchange(
+                        UPDATE_MEDICAL_RECORD_URL + medicalRecord.getId(),
+                        HttpMethod.PUT,
+                        request,
+                        String.class
+                );
+
+                if (response.getStatusCode().is2xxSuccessful()) {
+                    showAlert("Success", "Medical record updated successfully!");
+                } else {
+                    showAlert("Error", "Failed to update medical record: HTTP " + response.getStatusCodeValue());
+                }
+            } catch (Exception e) {
+                showAlert("Error", "Failed to update medical record: " + e.getMessage());
             }
-        } catch (Exception e) {
-            showAlert("Error", "Failed to update medical record: " + e.getMessage());
         }
     }
 
@@ -124,7 +127,7 @@ public class MedicalRecordDetailsController {
             if (response == ButtonType.OK) {
                 try {
                     ResponseEntity<String> responseEntity = restTemplate.exchange(
-                            DELETE_MEDICAL_RECORD_URL + medicalRecord.getId(), // Assuming MedicalRecord has an ID field
+                            DELETE_MEDICAL_RECORD_URL + medicalRecord.getId(),
                             HttpMethod.DELETE,
                             null,
                             String.class
@@ -133,7 +136,7 @@ public class MedicalRecordDetailsController {
                     if (responseEntity.getStatusCode().is2xxSuccessful()) {
                         showAlert("Success", "Medical record deleted successfully!");
                         if (onDeleteCallback != null) {
-                            onDeleteCallback.run(); // Notify parent to refresh
+                            onDeleteCallback.run();
                         }
                         stage.close();
                     } else {
@@ -146,19 +149,45 @@ public class MedicalRecordDetailsController {
         });
     }
 
+
+//    @FXML
+//    private void viewReport() {
+//        System.out.println("HostServices: " + hostServices);
+//        System.out.println("Report URL: " + medicalRecord.getReportUrl());
+//        if (medicalRecord.getReportUrl() != null && hostServices != null) {
+//            hostServices.showDocument(medicalRecord.getReportUrl());
+//        } else {
+//            showAlert("Error", "No report available or unable to open it.");
+//        }
+//    }
+@FXML
+private void viewReport() {
+    System.out.println("HostServices: " + hostServices);
+    System.out.println("Report URL: " + medicalRecord.getReportUrl());
+    if (medicalRecord != null && medicalRecord.getReportUrl() != null && hostServices != null) {
+        String fullUrl = "http://localhost:8081" + medicalRecord.getReportUrl(); // Adjust base URL as needed
+        System.out.println("Opening full URL: " + fullUrl);
+        hostServices.showDocument(fullUrl);
+    } else {
+        showAlert("Error", "No report available or unable to open it.");
+    }
+}
+
     @FXML
     private void closeWindow() {
         stage.close();
     }
 
     @FXML
-    public void handelHover(javafx.scene.input.MouseEvent mouseEvent) {
-        fancyButton.setStyle("-fx-background-color: #1976D2; -fx-translate-x: 5px; -fx-scale-x: 1.05; -fx-scale-y: 1.05;");
+    public void handleHover(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        button.setStyle("-fx-background-color: #16A085; -fx-text-fill: #FFFFFF; -fx-font-size: 14; -fx-background-radius: 8; -fx-padding: 10; -fx-translate-x: 5;");
     }
 
     @FXML
-    public void handleHoverExit(javafx.scene.input.MouseEvent mouseEvent) {
-        fancyButton.setStyle("-fx-background-color: #2196F3; -fx-translate-x: 0; -fx-scale-x: 1.0; -fx-scale-y: 1.0;");
+    public void handleHoverExit(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        button.setStyle("-fx-background-color: #1ABC9C; -fx-text-fill: #FFFFFF; -fx-font-size: 14; -fx-background-radius: 8; -fx-padding: 10; -fx-translate-x: 0;");
     }
 
     private void showAlert(String title, String message) {
@@ -167,23 +196,5 @@ public class MedicalRecordDetailsController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public void handleEditHover(MouseEvent mouseEvent) {
-    }
-
-    public void handleSaveHover(MouseEvent mouseEvent) {
-    }
-
-    public void handleDeleteHover(MouseEvent mouseEvent) {
-    }
-
-    public void handleEditHoverExit(MouseEvent mouseEvent) {
-    }
-
-    public void handleSaveHoverExit(MouseEvent mouseEvent) {
-    }
-
-    public void handleDeleteHoverExit(MouseEvent mouseEvent) {
     }
 }

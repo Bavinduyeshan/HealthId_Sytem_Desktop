@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="541.0" prefWidth="816.0" style="-fx-background-color: #eff7ff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.UserController">
 
-   <VBox alignment="TOP_CENTER" layoutX="443.0" layoutY="76.0" prefHeight="420.0" prefWidth="331.0" spacing="20" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px;">
+   <VBox alignment="TOP_CENTER" layoutX="432.0" layoutY="44.0" prefHeight="452.0" prefWidth="342.0" spacing="20" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px;">
       <children>
          <Text style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-fill: #333;" text="Sign In" />
          <Text style="-fx-font-size: 14px; -fx-fill: #666;" text="Welcome back! Please enter your details" />
@@ -35,7 +35,7 @@
             <Text style="-fx-fill: #388af5; -fx-underline: true; -fx-cursor: hand;" text="Forgot password" />
          </HBox>
 
-         <Button onAction="#handleLogin" fx:id="btnSignIn" prefWidth="280.0" style="-fx-background-color: #388af5; -fx-text-fill: white;                                           -fx-background-radius: 8px; -fx-font-size: 16px; -fx-padding: 12px;" text="Sign In" />
+         <Button fx:id="btnSignIn" onAction="#handleLogin" prefWidth="280.0" style="-fx-background-color: #388af5; -fx-text-fill: white;                                           -fx-background-radius: 8px; -fx-font-size: 16px; -fx-padding: 12px;" text="Sign In" />
       </children>
    </VBox>
    <Pane layoutX="6.0" layoutY="12.0" prefHeight="522.0" prefWidth="392.0" style="-fx-background-color: #388af5; -fx-background-radius: 15px;">

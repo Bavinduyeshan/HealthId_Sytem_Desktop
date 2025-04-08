@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TextField?>
+<AnchorPane prefHeight="701.0" prefWidth="980.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.DoctorController">
+   <children>
+      <!-- Existing Sidebar -->
+      <VBox layoutX="14.0" layoutY="154.0" prefHeight="711.0" prefWidth="246.0" spacing="15" style="-fx-background-color: #2C3E50; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);">
+         <children>
+            <AnchorPane prefHeight="248.0" prefWidth="210.0">
+               <children>
+                  <AnchorPane layoutX="-10.0" layoutY="-25.0" prefHeight="626.0" prefWidth="238.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="253.0" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" styleClass="sidebar-button" text="Settings" />
+                        <Button fx:id="patientScanButton" layoutX="14.0" layoutY="104.0" onAction="#openPatients" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" styleClass="sidebar-button" text="Patient Scan" textAlignment="JUSTIFY" />
+                        <Button layoutX="14.0" layoutY="174.0" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" styleClass="sidebar-button" text="Doctor Data" />
+                        <Button layoutX="14.0" layoutY="328.0" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" styleClass="sidebar-button" text="Reports" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+
+      <!-- Header -->
+      <HBox alignment="CENTER_LEFT" layoutX="289.0" layoutY="34.0" prefHeight="75.0" prefWidth="906.0" spacing="20" style="-fx-background-color: #2196F3; -fx-padding: 20; -fx-background-radius: 8;">
+         <children>
+            <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Doctor Records" />
+         </children>
+      </HBox>
+
+      <!-- Logo -->
+      <ImageView fitHeight="105.0" fitWidth="145.0" layoutX="85.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../HealthId%20system%20Frontend/my-project/src/assets/lgo.jpg" />
+         </image>
+      </ImageView>
+
+      <!-- Doctor Details Card -->
+      <VBox layoutX="318.0" layoutY="154.0" prefHeight="500.0" prefWidth="680.0" spacing="20" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-padding: 25; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 5);">
+         <children>
+            <!-- Doctor Name and Specialization -->
+            <VBox spacing="5">
+               <Label fx:id="doctorNameLabel" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Dr. John Doe" />
+               <HBox spacing="10">
+                  <TextField fx:id="firstnameField" visible="false" promptText="First Name" />
+                  <TextField fx:id="lastnameField" visible="false" promptText="Last Name" />
+               </HBox>
+               <Label fx:id="specializationLabel" style="-fx-font-size: 16; -fx-text-fill: #1ABC9C;" text="Cardiologist" />
+               <TextField fx:id="specializationField" visible="false" promptText="Specialization" />
+            </VBox>
+
+            <!-- Doctor Details Grid -->
+            <VBox spacing="15">
+               <HBox spacing="20">
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Doctor ID:" />
+                  <Label fx:id="doctorIdLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="1" />
+               </HBox>
+               <HBox spacing="20">
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Phone Number:" />
+                  <Label fx:id="phoneNumberLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="123-456-7890" />
+                  <TextField fx:id="phoneNumberField" visible="false" promptText="Phone Number" />
+               </HBox>
+               <HBox spacing="20">
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Email:" />
+                  <Label fx:id="emailLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="Not provided" />
+                  <TextField fx:id="emailField" visible="false" promptText="Email" />
+               </HBox>
+               <HBox spacing="20">
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Experience:" />
+                  <Label fx:id="experienceLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="Not provided" />
+                  <TextField fx:id="experienceField" visible="false" promptText="Experience" />
+               </HBox>
+               <HBox spacing="20">
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Education:" />
+                  <Label fx:id="educationLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="Not provided" />
+                  <TextField fx:id="educationField" visible="false" promptText="Education" />
+               </HBox>
+            </VBox>
+            <!-- Update Button -->
+            <Button fx:id="updateButton" onAction="#updateDoctorData" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 150; -fx-pref-height: 40; -fx-background-radius: 10;" text="Update Profile" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
