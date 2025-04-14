@@ -32,6 +32,7 @@ public class DoctorController {
 
 
 
+
     @FXML private TextField firstnameField;
     @FXML private TextField lastnameField;
     @FXML private TextField specializationField;

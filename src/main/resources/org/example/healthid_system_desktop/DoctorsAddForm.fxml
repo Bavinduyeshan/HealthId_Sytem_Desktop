@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="541.0" prefWidth="816.0" stylesheets="@DoctorAddStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.DoctorAddController">
+
+    <!-- Left Pane with Image -->
+    <Pane layoutX="10.0" layoutY="10.0" prefHeight="521.0" prefWidth="392.0" styleClass="left-pane">
+        <children>
+            <ImageView fitHeight="350.0" fitWidth="350.0" layoutX="21.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../../images/docadd.png" />
+                </image>
+            </ImageView>
+            <Text layoutX="30.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-fill: white; -fx-font-family: 'Arial';" text="HealthID System" />
+            <Text layoutX="30.0" layoutY="110.0" style="-fx-font-size: 16px; -fx-fill: #d6e6ff; -fx-font-family: 'Arial';" text="Empowering Healthcare Professionals" />
+        </children>
+    </Pane>
+
+    <!-- Right Doctor Add Form -->
+    <VBox alignment="CENTER" layoutX="432.0" layoutY="10.0" prefHeight="521.0" prefWidth="342.0" styleClass="login-card">
+        <children>
+            <!-- Title -->
+            <Text style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-fill: #1e3a8a; -fx-font-family: 'Arial';" text="Add Doctor Profile" />
+            <Text style="-fx-font-size: 14px; -fx-fill: #6b7280; -fx-font-family: 'Arial';" text="Complete your professional details below" />
+
+            <!-- ScrollPane for Form Fields -->
+            <ScrollPane fitToWidth="true" prefHeight="350.0" prefWidth="290.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+                <content>
+                    <VBox spacing="15" style="-fx-padding: 10px 20px 10px 0;">
+                        <!-- First Name -->
+                        <VBox spacing="5">
+                            <Label text="First Name" styleClass="form-label" />
+                            <TextField fx:id="txtFirstname" prefWidth="270.0" promptText="Enter First Name" styleClass="text-field" />
+                        </VBox>
+
+                        <!-- Last Name -->
+                        <VBox spacing="5">
+                            <Label text="Last Name" styleClass="form-label" />
+                            <TextField fx:id="txtLastname" prefWidth="270.0" promptText="Enter Last Name" styleClass="text-field" />
+                        </VBox>
+
+                        <!-- Phone Number -->
+                        <VBox spacing="5">
+                            <Label text="Phone Number" styleClass="form-label" />
+                            <TextField fx:id="txtPhonenumber" prefWidth="270.0" promptText="Enter Phone Number" styleClass="text-field" />
+                        </VBox>
+
+                        <!-- Email -->
+                        <VBox spacing="5">
+                            <Label text="Email" styleClass="form-label" />
+                            <TextField fx:id="txtEmail" prefWidth="270.0" promptText="Enter Email" styleClass="text-field" />
+                        </VBox>
+
+                        <!-- Specialization -->
+                        <VBox spacing="5">
+                            <Label text="Specialization" styleClass="form-label" />
+                            <TextField fx:id="txtSpecialization" prefWidth="270.0" promptText="Enter Specialization" styleClass="text-field" />
+                        </VBox>
+
+                        <!-- Years of Experience -->
+                        <VBox spacing="5">
+                            <Label text="Years of Experience" styleClass="form-label" />
+                            <TextField fx:id="txtExperience" prefWidth="270.0" promptText="Enter Years of Experience" styleClass="text-field" />
+                        </VBox>
+
+                        <!-- Education -->
+                        <VBox spacing="5">
+                            <Label text="Education" styleClass="form-label" />
+                            <TextField fx:id="txtEducation" prefWidth="270.0" promptText="Enter Education" styleClass="text-field" />
+                        </VBox>
+                    </VBox>
+                </content>
+            </ScrollPane>
+
+            <!-- Buttons Container -->
+            <VBox spacing="20" alignment="CENTER">
+                <!-- Submit Button -->
+                <Button fx:id="btnSubmitDoctor" onAction="#handleSubmitDoctor" prefWidth="290.0" styleClass="sign-in-button" text="Submit Doctor Details" />
+
+                <!-- Back to Login Button -->
+                <HBox alignment="CENTER">
+                    <Button fx:id="btnBackToLogin" onAction="#openLogin" prefWidth="290.0" styleClass="register-button" text="Back to Login" />
+                </HBox>
+            </VBox>
+        </children>
+    </VBox>
+
+</AnchorPane>

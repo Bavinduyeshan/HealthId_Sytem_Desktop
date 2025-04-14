@@ -74,6 +74,7 @@ public class Dashboard {
             int doctorCount = fetchData(docurl + "/doccount");
             //int recordsCount = fetchData(baseUrl + "/records/count");
 
+
             // Update labels
             patientCountLabel.setText(String.valueOf(patientCount));
             doctorCountLabel.setText(String.valueOf(doctorCount));

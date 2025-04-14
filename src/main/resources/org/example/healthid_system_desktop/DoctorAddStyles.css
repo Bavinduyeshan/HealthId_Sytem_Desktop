@@ -1,19 +1,3 @@
-.sidebar-button {
-    -fx-background-color: #34495E;
-    -fx-text-fill: #ECF0F1;
-    -fx-font-size: 16px;
-    -fx-pref-width: 210px;
-    -fx-pref-height: 50px;
-    -fx-background-radius: 10px;
-    -fx-alignment: CENTER_LEFT;
-    -fx-padding: 0 15 0 15;
-}
-
-.sidebar-button:hover {
-    -fx-background-color: #1ABC9C; /* Teal on hover */
-    -fx-cursor: hand;
-}
-
 /* styles.css */
 
 /* Background for the entire AnchorPane */
@@ -36,7 +20,14 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.3, 0, 5);
 }
 
-/* TextField and PasswordField Styling */
+/* Form Label Styling */
+.form-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6b7280;
+    -fx-font-family: 'Arial';
+}
+
+/* TextField Styling */
 .text-field {
     -fx-background-radius: 10px;
     -fx-padding: 12px;
@@ -52,7 +43,35 @@
     -fx-border-color: #388af5;
 }
 
-/* Forgot Password Text */
+/* ComboBox Styling (not used in this form, but kept for consistency) */
+.combo-box {
+    -fx-background-radius: 10px;
+    -fx-padding: 12px;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-color: #f9fafb;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.combo-box:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #f9fafb;
+    -fx-text-fill: #1e3a8a;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #e0f2fe;
+    -fx-text-fill: #1e6bd6;
+}
+
+/* Forgot Password Text (not used in this form, but kept for consistency) */
 .forgot-password {
     -fx-fill: #388af5;
     -fx-underline: true;
@@ -65,7 +84,7 @@
     -fx-fill: #1e6bd6;
 }
 
-/* Sign In Button */
+/* Sign In Button (used for Submit Doctor Details) */
 .sign-in-button {
     -fx-background-color: #388af5;
     -fx-text-fill: white;
@@ -81,7 +100,7 @@
     -fx-background-color: #1e6bd6;
 }
 
-/* Register Now Button */
+/* Register Now Button (used for Back to Login) */
 .register-button {
     -fx-background-color: transparent;
     -fx-text-fill: #388af5;
@@ -97,12 +116,4 @@
 .register-button:hover {
     -fx-background-color: #e0f2fe;
     -fx-text-fill: #1e6bd6;
-}
-
-/* Popup Card */
-.popup-card {
-    -fx-background-color: white;
-    -fx-background-radius: 15px;
-    -fx-padding: 20px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.3, 0, 5);
 }

@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.healthid_system_desktop.Register"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="541.0" prefWidth="816.0" stylesheets="@regStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.RegisterController">
+
+    <!-- Left Pane with Image -->
+    <Pane layoutX="10.0" layoutY="10.0" prefHeight="521.0" prefWidth="392.0" styleClass="left-pane">
+        <children>
+            <ImageView fitHeight="350.0" fitWidth="350.0" layoutX="21.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../../images/reg.jpg" />
+                </image>
+            </ImageView>
+            <Text layoutX="30.0" layoutY="80.0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-fill: white; -fx-font-family: 'Arial';" text="HealthID System" />
+            <Text layoutX="30.0" layoutY="110.0" style="-fx-font-size: 16px; -fx-fill: #d6e6ff; -fx-font-family: 'Arial';" text="Create Your Health Profile" />
+        </children>
+    </Pane>
+
+    <!-- Right Register Form -->
+    <VBox alignment="CENTER" layoutX="432.0" layoutY="44.0" prefHeight="452.0" prefWidth="342.0" spacing="15" styleClass="login-card">
+        <children>
+            <!-- Title -->
+            <Text style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-fill: #1e3a8a; -fx-font-family: 'Arial';" text="Sign Up" />
+            <Text style="-fx-font-size: 14px; -fx-fill: #6b7280; -fx-font-family: 'Arial';" text="Create a new account to get started" />
+
+            <!-- Username Field -->
+            <TextField fx:id="txtUsername" prefWidth="280.0" promptText="Enter your Username" styleClass="text-field" />
+
+            <!-- Email Field -->
+            <TextField fx:id="txtEmail" prefWidth="280.0" promptText="Enter your Email" styleClass="text-field" />
+
+            <!-- Role ComboBox -->
+            <ComboBox fx:id="roleComboBox" prefWidth="280.0" promptText="Select your Role" styleClass="combo-box">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="DOCTOR" />
+                        <String fx:value="PATIENT" />
+                        <String fx:value="ADMIN" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- Password Field -->
+            <PasswordField fx:id="txtPassword" prefWidth="280.0" promptText="Password" styleClass="text-field" />
+
+            <!-- Confirm Password Field -->
+            <PasswordField fx:id="txtConfirmPassword" prefWidth="280.0" promptText="Confirm Password" styleClass="text-field" />
+
+            <!-- Terms and Privacy Policy -->
+            <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="280.0" spacing="60">
+                <CheckBox prefHeight="26.0" prefWidth="150.0" text="Agree to Terms" style="-fx-font-family: 'Arial'; -fx-font-size: 13px; -fx-text-fill: #6b7280;" />
+                <Text styleClass="forgot-password" text="Privacy Policy" />
+            </HBox>
+
+            <!-- Sign Up Button -->
+            <Button fx:id="btnSignUp" onAction="#handleRegister" prefWidth="280.0" styleClass="sign-in-button" text="Sign Up" />
+        </children>
+    </VBox>
 
 </AnchorPane>

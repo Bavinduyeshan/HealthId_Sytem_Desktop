@@ -140,6 +140,7 @@
 package org.example.healthid_system_desktop.controller;
 
 import javafx.application.HostServices;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -148,6 +149,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.healthid_system_desktop.model.User;
 import org.example.healthid_system_desktop.service.LoginService;
@@ -168,6 +170,9 @@ public class UserController {
     @FXML private CheckBox chkRemember;          // "Remember Me" checkbox (not implemented)
     @FXML private ImageView eyeIcon;             // Icon to toggle password visibility
     @FXML private Text txtForgotPassword;        // "Forgot Password" text link
+
+    @FXML
+    private Button btnRegisterNow;
 
 
     private Stage stage;
@@ -277,11 +282,67 @@ public class UserController {
     }
 
     /**
-     * Handles "Forgot Password" click event (placeholder).
+     * Handles "Forgot Password" click event by opening a popup for email input.
      * @param event Mouse event from clicking the text
      */
     @FXML
     public void handleForgotPassword(MouseEvent event) {
-        showAlert("Forgot Password", "Password recovery functionality coming soon.");
+        try {
+            // Load the ForgotPasswordPopup.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/healthid_system_desktop/ForgotPasswordPopUp.fxml"));
+            Parent root = loader.load();
+
+            // Create a new Stage for the popup
+            Stage popupStage = new Stage();
+            popupStage.setScene(new Scene(root));
+            popupStage.setTitle("Forgot Password");
+
+            // Make the popup modal (blocks interaction with the login form until closed)
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initOwner(txtusername.getScene().getWindow());
+
+            // Prevent resizing
+            popupStage.setResizable(false);
+
+            // Show the popup and wait for it to close
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to open forgot password popup: " + e.getMessage());
+        }
     }
+
+    @FXML
+    private void openRegister(ActionEvent event) {
+        try {
+            // Load Register.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/healthid_system_desktop/Register.fxml"));
+            Scene registerScene = new Scene(loader.load(), 816, 541);
+
+            // Get the current stage and set the new scene
+            Stage stage = (Stage) btnRegisterNow.getScene().getWindow();
+            stage.setScene(registerScene);
+            stage.setTitle("Register");
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to open registration form: " + e.getMessage());
+        }
+    }
+
+    // Utility method to show alerts
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    // Clear login form fields
+    private void clearLoginFields() {
+        txtusername.clear();
+        txtpassword.clear();
+    }
+
+    // Clear registration form fields
+
 }

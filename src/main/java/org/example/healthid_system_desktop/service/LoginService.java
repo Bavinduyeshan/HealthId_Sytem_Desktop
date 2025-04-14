@@ -175,8 +175,11 @@ public class LoginService {
     private static final String DOCTOR_API_URL = "http://localhost:8082/doctors/ByUserId/";   // Endpoint to get doctor details
     private static final String JWT_SECRET = "lxK8roAuO9eYbuzJdVLMSJWnQWbnstt4+0htpxie8KE7gmMTdpNGpNkzikfiEZderpl6ikl0P9SHPIqaPjvo1A==";              // JWT secret key (replace with actual key)
 
+    private static final String FORGOT_PASSWORD_URL = "http://localhost:8080/users/forgot-password";
+
     /**
      * Authenticates a user by sending credentials to the User Service and returns a JWT token.
+     *
      * @param user User object containing username and password
      * @return JWT token if successful, null if authentication fails
      * @throws Exception if an error occurs during the request
@@ -213,6 +216,7 @@ public class LoginService {
 
     /**
      * Extracts the username from a JWT token.
+     *
      * @param token JWT token received from authentication
      * @return Username stored in the token's subject claim
      */
@@ -288,6 +292,7 @@ public class LoginService {
 
     /**
      * Extracts the username from a JWT token.
+     *
      * @param token JWT token received from authentication
      * @return Username stored in the token's subject claim
      */
@@ -349,6 +354,7 @@ public class LoginService {
 
     /**
      * Creates a JSON object for the login request body.
+     *
      * @param username User's username
      * @param password User's password
      * @return JSONObject with username and password
@@ -358,6 +364,55 @@ public class LoginService {
         json.put("username", username);
         json.put("password", password);
         return json;
+    }
+
+
+    /**
+     * Sends a password reset request to the backend for the given email.
+     *
+     * @param email User's email address
+     * @return true if the request was successful, false otherwise
+     * @throws Exception if an error occurs during the request
+     */
+    public boolean requestPasswordReset(String email) throws Exception {
+        try {
+            // Create JSON payload with email
+            JSONObject json = new JSONObject();
+            json.put("email", email);
+            System.out.println("Request payload: " + json.toString()); // Log the payload
+
+            // Build and send HTTP POST request to forgot password endpoint
+            HttpClient client = HttpClient.newHttpClient();
+            System.out.println("Sending request to: " + FORGOT_PASSWORD_URL); // Log the URL
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(FORGOT_PASSWORD_URL))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json.toString()))
+                    .build();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            // Log response details
+            System.out.println("Response status code: " + response.statusCode());
+            System.out.println("Response body: " + response.body());
+
+            // Check if response is successful (HTTP 200)
+            if (response.statusCode() == HttpURLConnection.HTTP_OK) {
+                System.out.println("Password reset request successful.");
+                return true;
+            } else {
+                System.out.println("Password reset request failed with status: " + response.statusCode());
+                return false;
+            }
+        } catch (java.net.ConnectException e) {
+            System.out.println("Connection error: " + e.getMessage());
+            throw new Exception("Cannot connect to server: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("I/O error: " + e.getMessage());
+            throw new Exception("I/O error during password reset request: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
+            throw new Exception("Password reset request failed: " + e.getMessage());
+        }
     }
 }
 
