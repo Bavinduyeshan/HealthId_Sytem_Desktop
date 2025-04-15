@@ -1,0 +1,501 @@
+/* styles.css */
+
+/* Popup Card */
+.popup-card {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f8fafc);
+    -fx-padding: 30px;
+    -fx-background-radius: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 6);
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 16px;
+    -fx-border-width: 1.5px;
+}
+
+/* Card Title */
+.card-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3a8a;
+    -fx-font-family: 'Arial';
+    -fx-padding: 0 0 15 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);
+}
+
+/* Form Label */
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #6b7280;
+    -fx-font-family: 'Arial';
+    -fx-font-weight: bold;
+}
+
+/* TextField Styling */
+.text-field {
+    -fx-background-color: #f9fafb;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #4b5563;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial';
+    -fx-padding: 8px;
+}
+
+.text-field:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+/* ComboBox Styling */
+.combo-box {
+    -fx-background-color: #f9fafb;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial';
+    -fx-padding: 8px;
+}
+
+.combo-box:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #f9fafb;
+    -fx-text-fill: #1e3a8a;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #e0f2fe;
+    -fx-text-fill: #1e6bd6;
+}
+
+/* TextArea Styling */
+.text-area {
+    -fx-background-color: #f9fafb;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #4b5563;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial';
+    -fx-padding: 8px;
+}
+
+.text-area:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+/* Upload Button */
+.upload-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 8px;
+    -fx-font-family: 'Arial';
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.upload-button:hover {
+    -fx-background-color: #388E3C;
+}
+
+/* Cancel Button */
+.cancel-button {
+    -fx-background-color: #f44336;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 24px;
+    -fx-background-radius: 10px;
+    -fx-font-family: 'Arial';
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2);
+}
+
+.cancel-button:hover {
+    -fx-background-color: #d32f2f;
+}
+
+/* Save Button */
+.save-button {
+    -fx-background-color: #388af5;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 24px;
+    -fx-background-radius: 10px;
+    -fx-font-family: 'Arial';
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2);
+}
+
+.save-button:hover {
+    -fx-background-color: #1e6bd6;
+}
+
+/* Existing styles (kept for consistency) */
+
+/* Background for AnchorPane */
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #e0e7ff, #f0f5ff);
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: linear-gradient(to bottom, #1e3a8a, #1e6bd6);
+    -fx-background-radius: 15px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 12, 0, 0, 3);
+}
+
+/* Sidebar Title */
+.sidebar-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 22px;
+    -fx-font-family: 'Arial';
+    -fx-font-weight: bold;
+}
+
+/* Sidebar Buttons */
+.sidebar-button {
+    -fx-background-color: #388af5;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial';
+    -fx-pref-width: 177px;
+    -fx-pref-height: 50px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
+    -fx-cursor: hand;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #1e6bd6;
+}
+
+/* Header Card */
+.header-card {
+    -fx-background-color: #388af5;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
+/* Menu Toggle Button */
+.menu-toggle-button {
+    -fx-font-size: 18px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+
+/* Header Title */
+.header-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: 'Arial';
+}
+
+/* Scan Button */
+.scan-button {
+    -fx-font-size: 14px;
+    -fx-background-color: #ffa726;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 6px;
+    -fx-font-weight: bold;
+    -fx-font-family: 'Arial';
+    -fx-cursor: hand;
+}
+
+.scan-button:hover {
+    -fx-background-color: #fb8c00;
+}
+
+/* Info Card (Patient Info and Record Form) */
+.info-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 4);
+}
+
+/* Card Title */
+.card-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3a8a;
+    -fx-font-family: 'Arial';
+}
+
+/* Form Label */
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #6b7280;
+    -fx-font-family: 'Arial';
+}
+
+/* Form Value (Labels displaying data) */
+.form-value {
+    -fx-font-size: 14px;
+    -fx-text-fill: #1e3a8a;
+    -fx-font-family: 'Arial';
+}
+
+/* TextField Styling */
+.text-field {
+    -fx-background-radius: 4px;
+    -fx-padding: 10px;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 4px;
+    -fx-background-color: #f9fafb;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.text-field:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+/* DatePicker Styling */
+.date-picker {
+    -fx-background-radius: 4px;
+    -fx-padding: 10px;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 4px;
+    -fx-background-color: #f9fafb;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.date-picker:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+/* TextArea Styling */
+.text-area {
+    -fx-background-radius: 4px;
+    -fx-padding: 10px;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 4px;
+    -fx-background-color: #f9fafb;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.text-area:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+/* ListView Styling */
+.list-view {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
+/* Add Button */
+.add-button {
+    -fx-font-size: 14px;
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 6px 12px;
+    -fx-background-radius: 4px;
+    -fx-font-family: 'Arial';
+    -fx-cursor: hand;
+}
+
+.add-button:hover {
+    -fx-background-color: #388E3C;
+}
+
+/* Cancel Button */
+.cancel-button {
+    -fx-font-size: 14px;
+    -fx-background-color: #f44336;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+    -fx-font-family: 'Arial';
+    -fx-cursor: hand;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #d32f2f;
+}
+
+/* Save Button */
+.save-button {
+    -fx-font-size: 14px;
+    -fx-background-color: #388af5;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+    -fx-font-family: 'Arial';
+    -fx-cursor: hand;
+}
+
+.save-button:hover {
+    -fx-background-color: #1e6bd6;
+}
+
+/* Left Pane with Image */
+.left-pane {
+    -fx-background-color: linear-gradient(to bottom right, #388af5, #1e6bd6);
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 2, 2);
+}
+
+/* Login Card (VBox) */
+.login-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
+    -fx-padding: 40px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.3, 0, 5);
+}
+
+/* Form Label Styling */
+.form-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6b7280;
+    -fx-font-family: 'Arial';
+}
+
+/* TextField Styling */
+.text-field {
+    -fx-background-radius: 10px;
+    -fx-padding: 12px;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-color: #f9fafb;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.text-field:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+/* ScrollPane Styling */
+.scroll-pane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Style the ScrollBar */
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+    -fx-padding: 0 5px 0 0;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #6b7280;
+    -fx-background-radius: 5px;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #388af5;
+}
+
+/* ComboBox Styling */
+.combo-box {
+    -fx-background-radius: 10px;
+    -fx-padding: 12px;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 10px;
+    -fx-background-color: #f9fafb;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.combo-box:hover {
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #388af5;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #f9fafb;
+    -fx-text-fill: #1e3a8a;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #e0f2fe;
+    -fx-text-fill: #1e6bd6;
+}
+
+/* Forgot Password Text */
+.forgot-password {
+    -fx-fill: #388af5;
+    -fx-underline: true;
+    -fx-cursor: hand;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 13px;
+}
+
+.forgot-password:hover {
+    -fx-fill: #1e6bd6;
+}
+
+/* Sign In Button */
+.sign-in-button {
+    -fx-background-color: #388af5;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-font-size: 16px;
+    -fx-font-family: 'Arial';
+    -fx-font-weight: bold;
+    -fx-padding: 12px;
+    -fx-cursor: hand;
+}
+
+.sign-in-button:hover {
+    -fx-background-color: #1e6bd6;
+}
+
+/* Register Now Button */
+.register-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #388af5;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial';
+    -fx-padding: 10px;
+    -fx-border-color: #388af5;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+
+.register-button:hover {
+    -fx-background-color: #e0f2fe;
+    -fx-text-fill: #1e6bd6;
+}
+
+/* Popup Card */
+.popup-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.3, 0, 5);
+}
