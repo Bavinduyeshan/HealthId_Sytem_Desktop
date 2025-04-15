@@ -39,7 +39,7 @@ public class MedicalRecordDetailsController {
     private Runnable onDeleteCallback;
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String UPDATE_MEDICAL_RECORD_URL = "http://localhost:8081/medical-records/update/";
-    private static final String DELETE_MEDICAL_RECORD_URL = "http://localhost:8081/medical-records/delete/";
+    private static final String DELETE_MEDICAL_RECORD_URL = "http://localhost:8081/medical-records/";
 
 
     // Setter for HostServices (injected by parent controller)
