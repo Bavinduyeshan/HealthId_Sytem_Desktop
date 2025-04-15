@@ -511,7 +511,7 @@ public class patientController {
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 String username = response.getBody();
-                usernameLabel.setText(username != null && !username.trim().isEmpty() ? "Welcome, " + username + "!" : "Welcome, User!");
+                usernameLabel.setText(username != null && !username.trim().isEmpty() ? "Welcome,DOCTOR " + username + "!" : "Welcome, User!");
             } else {
                 showAlert("Error", "Failed to fetch username: HTTP " + response.getStatusCodeValue());
                 usernameLabel.setText("Welcome, User!");

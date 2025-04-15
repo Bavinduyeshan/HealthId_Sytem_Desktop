@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1525.0" stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.Dashboard">
    <children>
       <!-- Sidebar -->
       <VBox layoutX="14.0" layoutY="174.0" prefHeight="711.0" prefWidth="238.0" spacing="15" styleClass="sidebar">
          <children>
-            <Button fx:id="patientScanButton" onAction="#openPatients" text="Patient Scan" styleClass="sidebar-button" />
-            <Button fx:id="doctorDataButton" onAction="#openDoctorView" text="Doctor Data" styleClass="sidebar-button" />
-            <Button text="Reports" styleClass="sidebar-button" />
-            <Button text="Settings" styleClass="sidebar-button" />
+            <Button fx:id="patientScanButton" onAction="#openPatients" styleClass="sidebar-button" text="Patient Scan" />
+            <Button fx:id="doctorDataButton" onAction="#openDoctorView" styleClass="sidebar-button" text="Doctor Data" />
+            <Button styleClass="sidebar-button" text="Reports" />
+            <Button styleClass="sidebar-button" text="Settings" />
          </children>
       </VBox>
 
@@ -24,36 +28,36 @@
             <!-- Header -->
             <HBox prefHeight="80.0" prefWidth="1200.0" styleClass="header-card">
                <children>
-                  <Label fx:id="dashboardLabel" text="Welcome to Your Dashboard" styleClass="header-title" />
+                  <Label fx:id="dashboardLabel" styleClass="header-title" text="Welcome to Your Dashboard" />
                </children>
             </HBox>
 
             <!-- Cards -->
-            <HBox spacing="30" alignment="CENTER">
+            <HBox alignment="CENTER" spacing="30">
                <!-- Patient Count Card -->
                <VBox prefHeight="180.0" prefWidth="360.0" spacing="15" styleClass="dashboard-card">
                   <children>
-                     <Label text="Total Patients" styleClass="card-title" />
-                     <Label fx:id="patientCountLabel" text="0" styleClass="card-value-patient" />
-                     <Rectangle fx:id="patientProgress" height="10.0" width="10.0" fill="#10B981" arcHeight="10" arcWidth="10" styleClass="progress-bar" />
+                     <Label styleClass="card-title" text="Total Patients" />
+                     <Label fx:id="patientCountLabel" styleClass="card-value-patient" text="0" />
+                     <Rectangle fx:id="patientProgress" arcHeight="10" arcWidth="10" fill="#10B981" height="10.0" styleClass="progress-bar" width="10.0" />
                   </children>
                </VBox>
 
                <!-- Doctor Count Card -->
                <VBox prefHeight="180.0" prefWidth="360.0" spacing="15" styleClass="dashboard-card">
                   <children>
-                     <Label text="Total Doctors" styleClass="card-title" />
-                     <Label fx:id="doctorCountLabel" text="0" styleClass="card-value-doctor" />
-                     <Rectangle fx:id="doctorProgress" height="10.0" width="0.0" fill="#3B82F6" arcHeight="10" arcWidth="10" styleClass="progress-bar" />
+                     <Label styleClass="card-title" text="Total Doctors" />
+                     <Label fx:id="doctorCountLabel" styleClass="card-value-doctor" text="0" />
+                     <Rectangle fx:id="doctorProgress" arcHeight="10" arcWidth="10" fill="#3B82F6" height="10.0" styleClass="progress-bar" width="0.0" />
                   </children>
                </VBox>
 
                <!-- Medical Records Count Card -->
                <VBox prefHeight="180.0" prefWidth="360.0" spacing="15" styleClass="dashboard-card">
                   <children>
-                     <Label text="Medical Records" styleClass="card-title" />
-                     <Label fx:id="recordsCountLabel" text="0" styleClass="card-value-records" />
-                     <Rectangle fx:id="recordsProgress" height="10.0" width="0.0" fill="#8B5CF6" arcHeight="10" arcWidth="10" styleClass="progress-bar" />
+                     <Label styleClass="card-title" text="Medical Records" />
+                     <Label fx:id="recordsCountLabel" styleClass="card-value-records" text="0" />
+                     <Rectangle fx:id="recordsProgress" arcHeight="10" arcWidth="10" fill="#8B5CF6" height="10.0" styleClass="progress-bar" width="0.0" />
                   </children>
                </VBox>
             </HBox>
@@ -61,10 +65,15 @@
       </VBox>
 
       <!-- Logo -->
-      <ImageView fitHeight="122.0" fitWidth="163.0" layoutX="70.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="105.0" fitWidth="113.0" layoutX="70.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/lgo.jpg" />
+            <Image url="@../../../images/8752202.png" />
          </image>
       </ImageView>
+      <Label fx:id="usernameLabel" layoutX="19.0" layoutY="136.0" prefHeight="27.0" prefWidth="251.0" styleClass="sidebar-title" text="Welcome, User!">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

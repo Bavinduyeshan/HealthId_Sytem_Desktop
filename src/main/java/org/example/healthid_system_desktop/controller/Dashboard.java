@@ -1,5 +1,6 @@
 package org.example.healthid_system_desktop.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,7 @@ public class Dashboard {
     @FXML private Rectangle patientProgress;
     @FXML private Rectangle doctorProgress;
     @FXML private Rectangle recordsProgress;
+    @FXML private Label usernameLabel;
 
     private HostServices hostServices;
     private String authToken;
@@ -46,23 +48,57 @@ public class Dashboard {
 
     public void setAuthToken(String token) {
         this.authToken = token;
+        System.out.println("setAuthToken called with token: " + (token != null ? "present" : "null"));
     }
 
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
+        System.out.println("setUserDetails called. userDetails: " + (userDetails != null ? userDetails.getUsername() : "null"));
+        updateWelcomeMessage();
+    }
+
+    private void updateWelcomeMessage() {
+        if (userDetails != null) {
+            usernameLabel.setText("Welcome, " + userDetails.getRole() + " " + userDetails.getUsername() + "!");
+            System.out.println("Welcome message updated: Welcome, " + userDetails.getRole() + " " + userDetails.getUsername() + "!");
+        } else {
+            dashboardLabel.setText("Welcome to Your Dashboard!");
+            System.out.println("Welcome message set to fallback: Welcome to Your Dashboard!");
+        }
     }
 
     @FXML
     public void initialize() {
-        // Set welcome message
-        if (userDetails != null) {
-            dashboardLabel.setText("Welcome, " + userDetails.getRole() + " " + userDetails.getUsername() + "!");
-        } else {
-            dashboardLabel.setText("Welcome to Your Dashboard!");
-        }
+        System.out.println("Dashboard initialize called. authToken: " + (authToken != null ? "present" : "null") + ", userDetails: " + (userDetails != null ? userDetails.getUsername() : "null"));
+        updateWelcomeMessage(); // Set initial message (likely fallback)
+        fetchCounts(); // Proceed with counts
+    }
 
-        // Fetch and display counts
-        fetchCounts();
+    private void fetchUserDetails() {
+        try {
+            String userUrl = "http://localhost:8080/users/api/user/me";
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(userUrl))
+                    .header("Authorization", "Bearer " + authToken)
+                    .header("Content-Type", "application/json")
+                    .GET()
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                ObjectMapper mapper = new ObjectMapper();
+                UserDetails fetchedDetails = mapper.readValue(response.body(), UserDetails.class);
+                this.userDetails = fetchedDetails;
+                updateWelcomeMessage();
+                System.out.println("Fetched user details: " + fetchedDetails.getUsername() + ", role: " + fetchedDetails.getRole());
+            } else {
+                System.err.println("Failed to fetch user details. Status: " + response.statusCode() + ", Body: " + response.body());
+                updateWelcomeMessage();
+            }
+        } catch (Exception e) {
+            System.err.println("Error fetching user details: " + e.getMessage());
+            updateWelcomeMessage();
+        }
     }
 
     private void fetchCounts() {

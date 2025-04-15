@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@Patientsstyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.patientController">
    <left>
-      <AnchorPane prefHeight="720.0" prefWidth="200.0">
+      <AnchorPane prefHeight="1147.0" prefWidth="222.0">
          <children>
-            <VBox fx:id="menuBar" layoutX="5.0" layoutY="130.0" managed="true" prefHeight="580.0" prefWidth="219.0" spacing="15" styleClass="sidebar" visible="true">
+            <VBox fx:id="menuBar" layoutX="5.0" layoutY="192.0" managed="true" prefHeight="578.0" prefWidth="262.0" spacing="15" styleClass="sidebar" visible="true">
                <children>
-                  <AnchorPane prefHeight="680.0" prefWidth="190.0">
+                  <AnchorPane prefHeight="494.0" prefWidth="212.0">
                      <children>
-                        <Label fx:id="usernameLabel" layoutX="34.0" layoutY="67.0" text="Welcome, User!" styleClass="sidebar-title" />
-                        <Button layoutX="21.0" layoutY="176.0" onAction="#openDashboard" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="56.0" prefWidth="177.0" text="Dashboard" styleClass="sidebar-button" />
-                        <Button layoutX="21.0" layoutY="274.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="52.0" prefWidth="176.0" text="Patients" styleClass="sidebar-button" />
-                        <Button layoutX="21.0" layoutY="371.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="54.0" prefWidth="175.0" text="Reports" styleClass="sidebar-button" />
-                        <Button layoutX="21.0" layoutY="470.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="58.0" prefWidth="170.0" text="Settings" styleClass="sidebar-button" />
+                        <Button layoutX="21.0" layoutY="54.0" onAction="#openDashboard" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="56.0" prefWidth="177.0" styleClass="sidebar-button" text="Dashboard" />
+                        <Button layoutX="21.0" layoutY="170.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="52.0" prefWidth="176.0" styleClass="sidebar-button" text="Patients" />
+                        <Button layoutX="21.0" layoutY="277.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="54.0" prefWidth="175.0" styleClass="sidebar-button" text="Reports" />
+                        <Button layoutX="21.0" layoutY="380.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="58.0" prefWidth="170.0" styleClass="sidebar-button" text="Settings" />
                      </children>
                   </AnchorPane>
                </children>
             </VBox>
-            <ImageView fitHeight="101.0" fitWidth="146.0" layoutX="61.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="101.0" fitWidth="146.0" layoutX="71.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/lgo.jpg" />
+                  <Image url="@../../../images/8752202.png" />
                </image>
             </ImageView>
+            <Label fx:id="usernameLabel" layoutX="5.0" layoutY="143.0" prefHeight="26.0" prefWidth="283.0" styleClass="sidebar-title" text="Welcome, User!" />
          </children>
       </AnchorPane>
    </left>
@@ -35,14 +46,14 @@
          <VBox spacing="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
             <!-- Header -->
             <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header-card">
-               <Button fx:id="toggleMenuButton" onAction="#toggleMenu" text="☰" styleClass="menu-toggle-button" />
-               <Label text="Patient Records" styleClass="header-title" />
-               <Button fx:id="scanButton" onAction="#scanQrCode" onMouseEntered="#handleScanMouseEntered" onMouseExited="#handleScanMouseExited" text="SCAN ID" styleClass="scan-button" />
+               <Button fx:id="toggleMenuButton" onAction="#toggleMenu" styleClass="menu-toggle-button" text="☰" />
+               <Label styleClass="header-title" text="Patient Records" />
+               <Button fx:id="scanButton" onAction="#scanQrCode" onMouseEntered="#handleScanMouseEntered" onMouseExited="#handleScanMouseExited" styleClass="scan-button" text="SCAN ID" />
             </HBox>
 
             <!-- Patient Information -->
             <VBox spacing="15" styleClass="info-card">
-               <Label text="Patient Information" styleClass="card-title" />
+               <Label styleClass="card-title" text="Patient Information" />
                <GridPane hgap="20" vgap="15">
                   <columnConstraints>
                      <ColumnConstraints prefWidth="120" />
@@ -50,30 +61,30 @@
                      <ColumnConstraints prefWidth="120" />
                      <ColumnConstraints prefWidth="200" />
                   </columnConstraints>
-                  <Label text="Patient ID:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                  <Label styleClass="form-label" text="Patient ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                   <TextField fx:id="patientIdField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                  <Label text="User ID:" styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                  <Label fx:id="userIdLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-                  <Label text="First Name:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                  <Label fx:id="firstnameLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Last Name:" styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label fx:id="lastnameLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Label text="Date of Birth:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                  <Label fx:id="dobLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Gender:" styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label fx:id="genderLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Label text="Email:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                  <Label fx:id="emailLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Phone:" styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label fx:id="phoneLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <Label text="Address:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                  <Label fx:id="addressLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-                  <Label text="Created Date:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                  <Label fx:id="createdDateLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label text="Last Modified:" styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <Label fx:id="lastModifiedDateLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <Label text="Last Modified By:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                  <Label fx:id="lastModifiedByLabel" text="N/A" styleClass="form-value" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label styleClass="form-label" text="User ID:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                  <Label fx:id="userIdLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                  <Label styleClass="form-label" text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                  <Label fx:id="firstnameLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label styleClass="form-label" text="Last Name:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="lastnameLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label styleClass="form-label" text="Date of Birth:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  <Label fx:id="dobLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label styleClass="form-label" text="Gender:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="genderLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Label styleClass="form-label" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                  <Label fx:id="emailLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label styleClass="form-label" text="Phone:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label fx:id="phoneLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Label styleClass="form-label" text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                  <Label fx:id="addressLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+                  <Label styleClass="form-label" text="Created Date:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                  <Label fx:id="createdDateLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label styleClass="form-label" text="Last Modified:" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label fx:id="lastModifiedDateLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Label styleClass="form-label" text="Last Modified By:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                  <Label fx:id="lastModifiedByLabel" styleClass="form-value" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <rowConstraints>
                      <RowConstraints />
                      <RowConstraints />
@@ -89,24 +100,24 @@
             <!-- Medical Records -->
             <VBox spacing="15">
                <HBox alignment="CENTER_LEFT" spacing="15">
-                  <Label text="Medical Records" styleClass="card-title" />
-                  <Button fx:id="addRecordButton" onAction="#addRecord" text="+ Add New Record" styleClass="add-button" />
+                  <Label styleClass="card-title" text="Medical Records" />
+                  <Button fx:id="addRecordButton" onAction="#addRecord" styleClass="add-button" text="+ Add New Record" />
                </HBox>
                <ListView fx:id="recordsListView" prefHeight="200.0" styleClass="list-view" />
                <VBox fx:id="recordFormContainer" spacing="15" styleClass="info-card" visible="false">
-                  <Label text="New Medical Record" styleClass="card-title" />
+                  <Label styleClass="card-title" text="New Medical Record" />
                   <GridPane hgap="10" vgap="10">
                      <columnConstraints>
                         <ColumnConstraints prefWidth="120" />
                         <ColumnConstraints prefWidth="300" />
                      </columnConstraints>
-                     <Label text="Date:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                     <Label styleClass="form-label" text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                      <DatePicker fx:id="recordDate" styleClass="date-picker" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Label text="Diagnosis:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                     <Label styleClass="form-label" text="Diagnosis:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                      <TextField fx:id="diagnosisField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <Label text="Treatment:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                     <Label styleClass="form-label" text="Treatment:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                      <TextArea fx:id="treatmentArea" prefRowCount="3" styleClass="text-area" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                     <Label text="Notes:" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                     <Label styleClass="form-label" text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                      <TextArea fx:id="notesArea" prefRowCount="2" styleClass="text-area" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      <rowConstraints>
                         <RowConstraints />
@@ -116,8 +127,8 @@
                      </rowConstraints>
                   </GridPane>
                   <HBox alignment="CENTER_RIGHT" spacing="10">
-                     <Button onAction="#cancelRecord" text="Cancel" styleClass="cancel-button" />
-                     <Button onAction="#saveRecord" text="Save Record" styleClass="save-button" />
+                     <Button onAction="#cancelRecord" styleClass="cancel-button" text="Cancel" />
+                     <Button onAction="#saveRecord" styleClass="save-button" text="Save Record" />
                   </HBox>
                </VBox>
             </VBox>
