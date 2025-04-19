@@ -1,10 +1,15 @@
 package org.example.healthid_system_desktop.controller;
 
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.example.healthid_system_desktop.model.Doctor;
 import org.example.healthid_system_desktop.service.UserDetails;
@@ -14,6 +19,8 @@ import org.springframework.web.client.RestTemplate;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 
 public class DoctorController {
 
@@ -29,6 +36,8 @@ public class DoctorController {
     @FXML private Button patientScanButton;
     @FXML private Button updateButton;
 
+    @FXML private Button DashboardButton;
+
 
 
 
@@ -41,20 +50,31 @@ public class DoctorController {
     @FXML private TextField experienceField;
     @FXML private TextField educationField;
 
+    @FXML private Label usernameLabel;
+
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String DOCTOR_API_URL = "http://localhost:8082/doctors/ByDoc/";
     private static final String UPDATE_DOCTOR_API_URL = "http://localhost:8082/doctors/update/"; // Adjust if different
     private Integer loggedInDoctorId; // To store the logged-in doctor's ID
     private Stage stage;
 
+    private HostServices hostServices;
+
 
     private String authToken;
     private UserDetails userDetails;
+
+    private static final String USER_INFO_URL = "http://localhost:8080/users/api/user/me";
+
 
     private boolean isEditMode = false;
 
     private  Doctor currentDoctor;
 
+
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
+    }
 
 
 
@@ -64,6 +84,12 @@ public class DoctorController {
     public void initialize() {
         if (loggedInDoctorId != null) {
             fetchDoctorData();
+        }
+        // Set action and hover effects for dashboardButton
+        if (DashboardButton != null) {
+            DashboardButton.setOnAction(event -> openDashboard());
+            DashboardButton.setOnMouseEntered(this::handleMouseEntered);
+            DashboardButton.setOnMouseExited(this::handleMouseExited);
         }
     }
 
@@ -81,12 +107,38 @@ public class DoctorController {
 
     public void setAuthToken(String token) {
         this.authToken = token;
+        displayUsername();
     }
 
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
         if (userDetails != null && userDetails.getDoctorId() != null) {
             setLoggedInDoctorId(userDetails.getDoctorId());
+        }
+    }
+
+
+    private void displayUsername() {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", "Bearer " + authToken);
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    USER_INFO_URL, HttpMethod.GET, entity, String.class
+            );
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                String username = response.getBody();
+                usernameLabel.setText(username != null && !username.trim().isEmpty() ? "Welcome, DOCTOR " + username + "!" : "Welcome, User!");
+            } else {
+                showError("error loading message"+response.getStatusCodeValue());
+
+                usernameLabel.setText("Welcome, User!");
+            }
+        } catch (Exception e) {
+            showError("error loading message"+ e.getMessage());
+            usernameLabel.setText("Welcome, User!");
         }
     }
     // Fetch doctor data from backend
@@ -142,12 +194,65 @@ public class DoctorController {
     }
 
     @FXML
-    private void openPatients() {
-        // Implement patient scan functionality here
-        System.out.println("Opening patients view...");
+    public void openPatients(javafx.event.ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/healthid_system_desktop/Patients2.fxml"));
+            if (loader.getLocation() == null) {
+                throw new IOException("Patients2.fxml not found at /org/example/healthid_system_desktop/Patients2.fxml");
+            }
+            Parent root = loader.load();
+
+            patientController controller = loader.getController();
+            controller.setAuthToken(authToken);
+            if (userDetails != null) {
+                controller.setUserDetails(userDetails);
+            }
+            controller.setHostServices(hostServices);
+
+            Stage doctorstage= (Stage) patientScanButton.getScene().getWindow();
+            Stage patientStage = new Stage();
+            patientStage.setTitle("Patient Data");
+            patientStage.setScene(new Scene(root, 1280, 720));
+            patientStage.setResizable(true);
+            patientStage.show();
+            doctorstage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showError("Failed to load Patients: " + e.getMessage());
+        }
     }
 
 
+    @FXML
+    private void openDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/healthid_system_desktop/Dashboard.fxml"));
+            if (loader.getLocation() == null) {
+                throw new IOException("Dashboard.fxml not found at /org/example/healthid_system_desktop/Dashboard.fxml");
+            }
+            Parent root = loader.load();
+
+            Dashboard controller = loader.getController();
+            controller.setAuthToken(authToken);
+            if (userDetails != null) {
+                controller.setUserDetails(userDetails);
+            }
+            controller.setHostServices(hostServices);
+
+            // Use patientScanButton as fallback if dashboardButton is null
+            Stage doctorStage = (Stage) (DashboardButton != null ? DashboardButton .getScene().getWindow() : patientScanButton.getScene().getWindow());
+            Stage dashboardStage = new Stage();
+            dashboardStage.setTitle(userDetails != null ? userDetails.getRole() + " Dashboard" : "Dashboard");
+            dashboardStage.setScene(new Scene(root, 1525, 900));
+            dashboardStage.setResizable(true);
+            dashboardStage.show();
+
+            doctorStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load Dashboard: " + e.getMessage());
+        }
+    }
 
 
     @FXML
@@ -268,6 +373,15 @@ public class DoctorController {
         }
     }
 
+    public void handleMouseEntered(MouseEvent event) {
+        Button button = (Button) event.getSource();
+        button.setStyle("-fx-background-color: #546E7A; -fx-text-fill: #FFFFFF; -fx-font-size: 14;  -fx-background-radius: 8; -fx-padding: 10;");
+    }
+
+    public void handleMouseExited(MouseEvent event) {
+        Button button = (Button) event.getSource();
+        button.setStyle("-fx-background-color: #455A64; -fx-text-fill: #FFFFFF; -fx-font-size: 14;  -fx-background-radius: 8; -fx-padding: 10;");
+    }
     private void showError(String message) {
         doctorNameLabel.setText("Error");
         specializationLabel.setText("Could not load data");

@@ -2,91 +2,123 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<?import javafx.scene.control.TextField?>
-<AnchorPane prefHeight="701.0" prefWidth="980.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.DoctorController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="root" stylesheets="@doctordaashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.healthid_system_desktop.controller.DoctorController">
    <children>
-      <!-- Existing Sidebar -->
-      <VBox layoutX="14.0" layoutY="154.0" prefHeight="711.0" prefWidth="246.0" spacing="15" style="-fx-background-color: #2C3E50; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);">
+      <!-- Sidebar -->
+      <VBox layoutX="14.0" layoutY="150.0" prefHeight="720.0" prefWidth="250.0" spacing="15" styleClass="sidebar">
          <children>
-            <AnchorPane prefHeight="248.0" prefWidth="210.0">
-               <children>
-                  <AnchorPane layoutX="-10.0" layoutY="-25.0" prefHeight="626.0" prefWidth="238.0">
-                     <children>
-                        <Button layoutX="14.0" layoutY="253.0" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" styleClass="sidebar-button" text="Settings" />
-                        <Button fx:id="patientScanButton" layoutX="14.0" layoutY="104.0" onAction="#openPatients" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" styleClass="sidebar-button" text="Patient Scan" textAlignment="JUSTIFY" />
-                        <Button layoutX="14.0" layoutY="174.0" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" styleClass="sidebar-button" text="Doctor Data" />
-                        <Button layoutX="14.0" layoutY="328.0" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 210; -fx-pref-height: 50; -fx-background-radius: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 15 0 15;" styleClass="sidebar-button" text="Reports" />
-                     </children>
-                  </AnchorPane>
-               </children>
-            </AnchorPane>
+            <!-- Sidebar Menu -->
+            <VBox prefHeight="367.0" prefWidth="201.0" spacing="10" style="-fx-background-radius: 15px;">
+               <AnchorPane prefHeight="426.0" prefWidth="218.0">
+                  <children>
+                     <Button fx:id="patientScanButton" layoutX="5.0" layoutY="39.0" onAction="#openPatients" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" styleClass="sidebar-button" text="Patient Scan">
+                        <graphic>
+                           <SVGPath content="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8zm-1 4v5h2V8h-2zm0 7v2h2v-2h-2z" style="-fx-fill: #FFFFFF; -fx-scale-x: 0.8; -fx-scale-y: 0.8;" />
+                        </graphic>
+                     </Button>
+                     <Button layoutX="7.0" layoutY="133.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" styleClass="sidebar-button" text="Doctor Data">
+                        <graphic>
+                           <SVGPath content="M12 2a10 10 0 00-10 10c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.88 1.51 2.31 1.07 2.87.82.09-.65.35-1.07.63-1.32-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.564 9.564 0 0112 6.8c.85.004 1.71.114 2.51.337 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.56.94.56 1.54v2.29c0 .28.16.59.67.5A10 10 0 0022 12 10 10 0 0012 2z" style="-fx-fill: #FFFFFF; -fx-scale-x: 0.8; -fx-scale-y: 0.8;" />
+                        </graphic>
+                     </Button>
+                     <Button fx:id="DashboardButton" layoutX="5.0" layoutY="207.0" onAction="#openDashboard" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" styleClass="sidebar-button" text="Dashboard">
+                        <graphic>
+                           <SVGPath content="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h6v6h6v10H6z" style="-fx-fill: #FFFFFF; -fx-scale-x: 0.8; -fx-scale-y: 0.8;" />
+                        </graphic>
+                     </Button>
+                     <Button layoutX="5.0" layoutY="287.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="42.0" prefWidth="201.0" styleClass="sidebar-button" text="Settings">
+                        <graphic>
+                           <SVGPath content="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.488.488 0 0014 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" style="-fx-fill: #FFFFFF; -fx-scale-x: 0.8; -fx-scale-y: 0.8;" />
+                        </graphic>
+                     </Button>
+                  </children>
+               </AnchorPane>
+            </VBox>
          </children>
       </VBox>
 
       <!-- Header -->
-      <HBox alignment="CENTER_LEFT" layoutX="289.0" layoutY="34.0" prefHeight="75.0" prefWidth="906.0" spacing="20" style="-fx-background-color: #2196F3; -fx-padding: 20; -fx-background-radius: 8;">
+      <HBox alignment="CENTER_LEFT" layoutX="292.0" layoutY="14.0" prefHeight="80.0" prefWidth="1030.0" spacing="20" styleClass="header-card">
          <children>
-            <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Doctor Records" />
+            <Label styleClass="header-title" text="Doctor Records" />
          </children>
       </HBox>
 
-      <!-- Logo -->
-      <ImageView fitHeight="105.0" fitWidth="145.0" layoutX="85.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../HealthId%20system%20Frontend/my-project/src/assets/lgo.jpg" />
-         </image>
-      </ImageView>
-
       <!-- Doctor Details Card -->
-      <VBox layoutX="318.0" layoutY="154.0" prefHeight="500.0" prefWidth="680.0" spacing="20" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-padding: 25; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 5);">
+      <VBox layoutX="320.0" layoutY="145.0" prefHeight="580.0" prefWidth="960.0" spacing="20" styleClass="info-card">
          <children>
             <!-- Doctor Name and Specialization -->
-            <VBox spacing="5">
-               <Label fx:id="doctorNameLabel" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" text="Dr. John Doe" />
-               <HBox spacing="10">
-                  <TextField fx:id="firstnameField" visible="false" promptText="First Name" />
-                  <TextField fx:id="lastnameField" visible="false" promptText="Last Name" />
+            <VBox spacing="10">
+               <Label fx:id="doctorNameLabel" styleClass="card-title" text="Dr. John Doe" />
+               <HBox spacing="15">
+                  <TextField fx:id="firstnameField" promptText="First Name" styleClass="text-field" visible="false" />
+                  <TextField fx:id="lastnameField" promptText="Last Name" styleClass="text-field" visible="false" />
                </HBox>
-               <Label fx:id="specializationLabel" style="-fx-font-size: 16; -fx-text-fill: #1ABC9C;" text="Cardiologist" />
-               <TextField fx:id="specializationField" visible="false" promptText="Specialization" />
+               <Label fx:id="specializationLabel" style="-fx-font-size: 16; -fx-text-fill: #388af5; -fx-font-family: 'Arial';" text="Cardiologist" />
+               <TextField fx:id="specializationField" promptText="Specialization" styleClass="text-field" visible="false" />
             </VBox>
 
             <!-- Doctor Details Grid -->
-            <VBox spacing="15">
-               <HBox spacing="20">
-                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Doctor ID:" />
-                  <Label fx:id="doctorIdLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="1" />
+            <GridPane hgap="20" vgap="15">
+               <columnConstraints>
+                  <ColumnConstraints prefWidth="120" />
+                  <ColumnConstraints prefWidth="300" />
+                  <ColumnConstraints prefWidth="120" />
+                  <ColumnConstraints prefWidth="300" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+               <Label styleClass="form-label" text="Doctor ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+               <Label fx:id="doctorIdLabel" styleClass="form-value" text="1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+               <Label styleClass="form-label" text="Phone Number:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+               <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="phoneNumberLabel" styleClass="form-value" text="123-456-7890" />
+                  <TextField fx:id="phoneNumberField" promptText="Phone Number" styleClass="text-field" visible="false" />
                </HBox>
-               <HBox spacing="20">
-                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Phone Number:" />
-                  <Label fx:id="phoneNumberLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="123-456-7890" />
-                  <TextField fx:id="phoneNumberField" visible="false" promptText="Phone Number" />
+               <Label styleClass="form-label" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+               <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="emailLabel" styleClass="form-value" text="Not provided" />
+                  <TextField fx:id="emailField" promptText="Email" styleClass="text-field" visible="false" />
                </HBox>
-               <HBox spacing="20">
-                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Email:" />
-                  <Label fx:id="emailLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="Not provided" />
-                  <TextField fx:id="emailField" visible="false" promptText="Email" />
+               <Label styleClass="form-label" text="Experience:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+               <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="experienceLabel" styleClass="form-value" text="Not provided" />
+                  <TextField fx:id="experienceField" promptText="Experience" styleClass="text-field" visible="false" />
                </HBox>
-               <HBox spacing="20">
-                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Experience:" />
-                  <Label fx:id="experienceLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="Not provided" />
-                  <TextField fx:id="experienceField" visible="false" promptText="Experience" />
+               <Label styleClass="form-label" text="Education:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+               <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Label fx:id="educationLabel" styleClass="form-value" text="Not provided" />
+                  <TextField fx:id="educationField" promptText="Education" styleClass="text-field" visible="false" />
                </HBox>
-               <HBox spacing="20">
-                  <Label style="-fx-font-size: 14; -fx-text-fill: #666666; -fx-min-width: 120;" text="Education:" />
-                  <Label fx:id="educationLabel" style="-fx-font-size: 14; -fx-text-fill: #2C3E50;" text="Not provided" />
-                  <TextField fx:id="educationField" visible="false" promptText="Education" />
-               </HBox>
-            </VBox>
+            </GridPane>
+
             <!-- Update Button -->
-            <Button fx:id="updateButton" onAction="#updateDoctorData" style="-fx-background-color: #1ABC9C; -fx-text-fill: #ECF0F1; -fx-font-size: 16; -fx-pref-width: 150; -fx-pref-height: 40; -fx-background-radius: 10;" text="Update Profile" />
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+               <Button fx:id="updateButton" onAction="#updateDoctorData" styleClass="save-button" text="Update Profile" />
+            </HBox>
          </children>
       </VBox>
+      <!-- Logo -->
+      <ImageView fitHeight="80.0" fitWidth="120.0" layoutX="80.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/8752202.png" />         </image>
+      </ImageView>
+      <Label fx:id="usernameLabel" layoutX="92.0" layoutY="110.0" text="Label" />
    </children>
 </AnchorPane>

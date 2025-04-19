@@ -935,6 +935,8 @@ public class patientController {
     @FXML private TextArea treatmentArea;
     @FXML private TextArea notesArea;
 
+    @FXML private Button    dashboardButton;
+
     private HostServices hostServices;
     private static final double MENU_WIDTH = 189.0;
     private static final double FULL_WIDTH = 1280.0;
@@ -957,17 +959,44 @@ public class patientController {
         addRecordButton.setOnAction(event -> addRecord());
 
         menuBar.getChildren().forEach(node -> {
-            if (node instanceof Button) {
+            if (node instanceof Button && node != dashboardButton) {
                 Button btn = (Button) node;
                 btn.setOnMouseEntered(this::handleMouseEntered);
                 btn.setOnMouseExited(this::handleMouseExited);
-                if ("Dashboard".equals(btn.getText())) {
-                    btn.setOnAction(event -> openDashboard());
-                }
             }
         });
         scanButton.setOnMouseEntered(this::handleScanMouseEntered);
         scanButton.setOnMouseExited(this::handleScanMouseExited);
+    }
+
+    @FXML
+    private void openDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/healthid_system_desktop/Dashboard.fxml"));
+            if (loader.getLocation() == null) {
+                throw new IOException("Dashboard.fxml not found at /org/example/healthid_system_desktop/Dashboard.fxml");
+            }
+            Parent root = loader.load();
+
+            Dashboard controller = loader.getController();
+            controller.setAuthToken(authToken);
+            if (userDetails != null) {
+                controller.setUserDetails(userDetails);
+            }
+            controller.setHostServices(hostServices);
+
+            Stage patientStage = (Stage) (dashboardButton != null ? dashboardButton.getScene().getWindow() : scanButton.getScene().getWindow());
+            Stage dashboardStage = new Stage();
+            dashboardStage.setTitle(userDetails != null ? userDetails.getRole() + " Dashboard" : "Dashboard");
+            dashboardStage.setScene(new Scene(root, 1525, 900)); // Match Dashboard.fxml dimensions
+            dashboardStage.setResizable(true);
+            dashboardStage.show();
+
+            patientStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load Dashboard: " + e.getMessage());
+        }
     }
 
     public void setAuthToken(String token) {
@@ -1023,34 +1052,32 @@ public class patientController {
         toggleMenuButton.setText(isVisible ? "☰" : "✕");
     }
 
-    @FXML
-    private void openDashboard() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/healthid_system_desktop/Dashboard.fxml"));
-            if (loader.getLocation() == null) {
-                throw new IOException("Dashboard.fxml not found at /org/example/healthid_system_desktop/Dashboard.fxml");
-            }
-            Parent root = loader.load();
-
-            Dashboard controller = loader.getController();
-            controller.setAuthToken(authToken);
-            if (userDetails != null) {
-                controller.setUserDetails(userDetails);
-            }
-
-            Stage patientStage = (Stage) toggleMenuButton.getScene().getWindow();
-            Stage dashboardStage = new Stage();
-            dashboardStage.setTitle(userDetails != null ? userDetails.getRole() + " Dashboard" : "Dashboard");
-            dashboardStage.setScene(new Scene(root, 1400, 900));
-            dashboardStage.setResizable(true);
-            dashboardStage.show();
-
-            patientStage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load Dashboard: " + e.getMessage());
-        }
-    }
+//    @FXML
+//    private void openDashboard(String token,UserDetails userDetails) {
+//        try {
+//            // Corrected path with leading "/"
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/healthid_system_desktop/Dashboard.fxml"));
+//            if (loader.getLocation() == null) {
+//                throw new IOException("FXML file not found at /org/example/healthid_system_desktop/Dashboard.fxml");
+//            }
+//            Parent root = loader.load();
+//
+//            // Get the Dashboard controller and pass token/details
+//            Dashboard controller = loader.getController();
+//            controller.setAuthToken(token);         // Added method
+//            controller.setUserDetails(userDetails); // Added method
+//            // Pass HostServices and other data to DashboardController
+//            controller.setHostServices(hostServices);
+//
+//            Stage stage = (Stage) dashboardButton.getScene().getWindow();
+//            stage.setScene(new Scene(root));
+//            stage.setTitle(userDetails.getRole() + " Dashboard");
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            showAlert("Error", "Failed to load dashboard: " + e.getMessage());
+//        }
+//    }
 
     @FXML
     private void scanQrCode() {
@@ -1287,12 +1314,12 @@ public class patientController {
 
     public void handleMouseEntered(MouseEvent event) {
         Button button = (Button) event.getSource();
-        button.setStyle("-fx-background-color: #546E7A; -fx-text-fill: #FFFFFF; -fx-font-size: 14; -fx-pref-width: 210; -fx-background-radius: 8; -fx-padding: 10;");
+        button.setStyle("-fx-background-color: #546E7A; -fx-text-fill: #FFFFFF; -fx-font-size: 14;  -fx-background-radius: 8; -fx-padding: 10;");
     }
 
     public void handleMouseExited(MouseEvent event) {
         Button button = (Button) event.getSource();
-        button.setStyle("-fx-background-color: #455A64; -fx-text-fill: #FFFFFF; -fx-font-size: 14; -fx-pref-width: 210; -fx-background-radius: 8; -fx-padding: 10;");
+        button.setStyle("-fx-background-color: #455A64; -fx-text-fill: #FFFFFF; -fx-font-size: 14;  -fx-background-radius: 8; -fx-padding: 10;");
     }
 
     public void handleScanMouseEntered(MouseEvent event) {

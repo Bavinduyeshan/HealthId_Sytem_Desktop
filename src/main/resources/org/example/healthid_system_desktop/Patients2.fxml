@@ -24,10 +24,10 @@
                <children>
                   <AnchorPane prefHeight="494.0" prefWidth="212.0">
                      <children>
-                        <Button layoutX="21.0" layoutY="54.0" onAction="#openDashboard" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="56.0" prefWidth="177.0" styleClass="sidebar-button" text="Dashboard" />
+                        <Button  fx:id="dashboardButton" layoutX="21.0" layoutY="54.0" onAction="#openDashboard" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="56.0" prefWidth="177.0" styleClass="sidebar-button" text="Dashboard" />
                         <Button layoutX="21.0" layoutY="170.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="52.0" prefWidth="176.0" styleClass="sidebar-button" text="Patients" />
-                        <Button layoutX="21.0" layoutY="277.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="54.0" prefWidth="175.0" styleClass="sidebar-button" text="Reports" />
-                        <Button layoutX="21.0" layoutY="380.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="58.0" prefWidth="170.0" styleClass="sidebar-button" text="Settings" />
+                        <Button layoutX="21.0" layoutY="285.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="54.0" prefWidth="175.0" styleClass="sidebar-button" text="Reports" />
+                        <Button layoutX="21.0" layoutY="410.0" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="58.0" prefWidth="170.0" styleClass="sidebar-button" text="Settings" />
                      </children>
                   </AnchorPane>
                </children>

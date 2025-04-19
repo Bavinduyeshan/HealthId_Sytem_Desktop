@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,10 +23,8 @@ import java.net.http.HttpResponse;
 public class Dashboard {
 
     @FXML private Label dashboardLabel;
-    @FXML private Button patientScanButton; // Matches fx:id in FXML
+    @FXML private Button patientScanButton;
     @FXML private Button doctorDataButton;
-
-    // New FXML elements for cards
     @FXML private Label patientCountLabel;
     @FXML private Label doctorCountLabel;
     @FXML private Label recordsCountLabel;
@@ -33,14 +32,17 @@ public class Dashboard {
     @FXML private Rectangle doctorProgress;
     @FXML private Rectangle recordsProgress;
     @FXML private Label usernameLabel;
+    @FXML private PieChart dataDistributionChart;
+    @FXML private BarChart<String, Number> departmentChart;
+    @FXML private LineChart<String, Number> recordsTrendChart;
 
     private HostServices hostServices;
     private String authToken;
     private UserDetails userDetails;
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
-    private static final double MAX_PROGRESS_WIDTH = 320.0; // Max width of the progress bar
-    private static final int MAX_COUNT = 1000; // Arbitrary max count for scaling (adjust as needed)
+    private static final double MAX_PROGRESS_WIDTH = 320.0;
+    private static final int MAX_COUNT = 1000;
 
     public void setHostServices(HostServices hostServices) {
         this.hostServices = hostServices;
@@ -70,56 +72,37 @@ public class Dashboard {
     @FXML
     public void initialize() {
         System.out.println("Dashboard initialize called. authToken: " + (authToken != null ? "present" : "null") + ", userDetails: " + (userDetails != null ? userDetails.getUsername() : "null"));
-        updateWelcomeMessage(); // Set initial message (likely fallback)
-        fetchCounts(); // Proceed with counts
-    }
-
-    private void fetchUserDetails() {
-        try {
-            String userUrl = "http://localhost:8080/users/api/user/me";
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(userUrl))
-                    .header("Authorization", "Bearer " + authToken)
-                    .header("Content-Type", "application/json")
-                    .GET()
-                    .build();
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 200) {
-                ObjectMapper mapper = new ObjectMapper();
-                UserDetails fetchedDetails = mapper.readValue(response.body(), UserDetails.class);
-                this.userDetails = fetchedDetails;
-                updateWelcomeMessage();
-                System.out.println("Fetched user details: " + fetchedDetails.getUsername() + ", role: " + fetchedDetails.getRole());
-            } else {
-                System.err.println("Failed to fetch user details. Status: " + response.statusCode() + ", Body: " + response.body());
-                updateWelcomeMessage();
-            }
-        } catch (Exception e) {
-            System.err.println("Error fetching user details: " + e.getMessage());
-            updateWelcomeMessage();
-        }
+        updateWelcomeMessage();
+        fetchCounts();
+        initializeCharts();
     }
 
     private void fetchCounts() {
         try {
-            // Replace with your actual backend API endpoints
-            String patientUrl = "http://localhost:8083/pateints"; // Update this
-            String docurl="http://localhost:8082/doctors";
+            String patientUrl = "http://localhost:8083/pateints";
+            String docUrl = "http://localhost:8082/doctors";
+            String recordurl="http://localhost:8081/medical-records";
             int patientCount = fetchData(patientUrl + "/count");
-            int doctorCount = fetchData(docurl + "/doccount");
-            //int recordsCount = fetchData(baseUrl + "/records/count");
-
+            int doctorCount = fetchData(docUrl + "/doccount");
+            int recordsCount = fetchData(recordurl + "/count"); // Add endpoint for records
 
             // Update labels
             patientCountLabel.setText(String.valueOf(patientCount));
             doctorCountLabel.setText(String.valueOf(doctorCount));
-           // recordsCountLabel.setText(String.valueOf(recordsCount));
+            recordsCountLabel.setText(String.valueOf(recordsCount));
 
-            // Update progress bars (simulate filling line)
+            // Update progress bars
             patientProgress.setWidth(Math.min((patientCount / (double) MAX_COUNT) * MAX_PROGRESS_WIDTH, MAX_PROGRESS_WIDTH));
             doctorProgress.setWidth(Math.min((doctorCount / (double) MAX_COUNT) * MAX_PROGRESS_WIDTH, MAX_PROGRESS_WIDTH));
-           // recordsProgress.setWidth(Math.min((recordsCount / (double) MAX_COUNT) * MAX_PROGRESS_WIDTH, MAX_PROGRESS_WIDTH));
+            recordsProgress.setWidth(Math.min((recordsCount / (double) MAX_COUNT) * MAX_PROGRESS_WIDTH, MAX_PROGRESS_WIDTH));
+
+            // Update Pie Chart
+            dataDistributionChart.getData().clear();
+            dataDistributionChart.getData().addAll(
+                    new PieChart.Data("Patients", patientCount),
+                    new PieChart.Data("Doctors", doctorCount)
+//                    new PieChart.Data("Records", recordsCount)
+            );
         } catch (Exception e) {
             e.printStackTrace();
             patientCountLabel.setText("N/A");
@@ -129,14 +112,48 @@ public class Dashboard {
         }
     }
 
+    private void initializeCharts() {
+        // Bar Chart: Department Statistics (Mock Data)
+        XYChart.Series<String, Number> patientSeries = new XYChart.Series<>();
+        patientSeries.setName("Patients");
+        patientSeries.getData().addAll(
+                new XYChart.Data<>("Cardiology", 50),
+                new XYChart.Data<>("Neurology", 30),
+                new XYChart.Data<>("Pediatrics", 20)
+        );
+
+        XYChart.Series<String, Number> doctorSeries = new XYChart.Series<>();
+        doctorSeries.setName("Doctors");
+        doctorSeries.getData().addAll(
+                new XYChart.Data<>("Cardiology", 10),
+                new XYChart.Data<>("Neurology", 15),
+                new XYChart.Data<>("Pediatrics", 5)
+        );
+
+        departmentChart.getData().addAll(patientSeries, doctorSeries);
+
+        // Line Chart: Records Trend (Mock Data)
+        XYChart.Series<String, Number> recordsSeries = new XYChart.Series<>();
+        recordsSeries.setName("Records");
+        recordsSeries.getData().addAll(
+                new XYChart.Data<>("Jan", 100),
+                new XYChart.Data<>("Feb", 150),
+                new XYChart.Data<>("Mar", 200),
+                new XYChart.Data<>("Apr", 180),
+                new XYChart.Data<>("May", 250)
+        );
+
+        recordsTrendChart.getData().add(recordsSeries);
+    }
+
     private int fetchData(String url) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(url))
-                .header("Authorization", "Bearer " + authToken) // Add auth token if required
+                .header("Authorization", "Bearer " + authToken)
                 .GET()
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        return Integer.parseInt(response.body().trim()); // Assumes response is a plain number
+        return Integer.parseInt(response.body().trim());
     }
 
     @FXML
@@ -178,11 +195,11 @@ public class Dashboard {
             Parent root = loader.load();
 
             DoctorController controller = loader.getController();
-            controller.setStage(new Stage());
-            if (userDetails != null && userDetails.getDoctorId() != null) {
-                controller.setLoggedInDoctorId(userDetails.getDoctorId());
-            }
             controller.setAuthToken(authToken);
+            if (userDetails != null) {
+                controller.setUserDetails(userDetails);
+            }
+            controller.setHostServices(hostServices);
 
             Stage dashboardStage = (Stage) doctorDataButton.getScene().getWindow();
             Stage doctorStage = new Stage();
